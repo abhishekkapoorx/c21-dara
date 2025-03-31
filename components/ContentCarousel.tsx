@@ -30,7 +30,7 @@ const CrossfadeSlideshow = () => {
 
 
   return (
-      <div className="relative w-full h-[50vh] overflow-hidden rounded-2xl bg-bottom">
+      <div className="relative w-full h-[80vh] overflow-hidden rounded-2xl bg-bottom">
         {/* Slideshow with crossfade effect */}
         <AnimatePresence>
           <motion.div

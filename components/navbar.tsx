@@ -21,10 +21,10 @@ import { usePathname } from "next/navigation";
 import {
   SearchIcon
 } from "@/components/icons";
-import { ThemeSwitch } from "@/components/theme-switch";
+// import { ThemeSwitch } from "@/components/theme-switch";
 import { siteConfig } from "@/config/site";
 
-import logout from "@/actions/logout";
+// import logout from "@/actions/logout";
 import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from "@heroui/react";
 import { IconChevronDown, IconLogin, IconLogout } from "@tabler/icons-react";
 import Image from "next/image";
@@ -63,11 +63,11 @@ export const Navbar = ({ session }: { session: Session | null }) => {
 
 
   return (
-    <NextUINavbar isMenuOpen={isMenuOpen} onMenuOpenChange={setIsMenuOpen}>
+    <NextUINavbar isMenuOpen={isMenuOpen} onMenuOpenChange={setIsMenuOpen} className="py-8">
       {/* <Logo /> */}
       <NavbarBrand as="li" className="gap-3 max-w-fit mr-4">
-        <NextLink className="flex justify-center items-center gap-1" href="/">
-          <Image src={require("@/public/c21-logo.svg")} alt="C21 Logo" width={120} height={40} className="w-40 h-20" />
+        <NextLink className="flex justify-center items-center gap-1 bg-center" href="/">
+          <Image src={require("@/public/images/logo_trans.png")} alt="C21 Logo" width={150} height={40} className="" />
         </NextLink>
       </NavbarBrand>
 
@@ -80,7 +80,7 @@ export const Navbar = ({ session }: { session: Session | null }) => {
                 <NextLink
                   className={clsx(
                     linkStyles({ color: "foreground" }),
-                    "data-[active=true]:text-primary data-[active=true]:font-medium",
+                    "data-[active=true]:text-yellow-600 data-[active=true]:font-medium",
                   )}
                   color="foreground"
                   data-active={pathname === item.href ? "true" : "false"}
@@ -141,12 +141,12 @@ export const Navbar = ({ session }: { session: Session | null }) => {
               </Dropdown>
             )
           ))}
-          {user && user.role === 'ADMIN' && (
+          {/* {user && user.role === 'ADMIN' && (
             <NavbarItem key={"/admin"}>
               <NextLink
                 className={clsx(
                   linkStyles({ color: "foreground" }),
-                  "data-[active=true]:text-primary data-[active=true]:font-medium",
+                  "data-[active=true]:text-yellow-600 data-[active=true]:font-medium",
                 )}
                 color="foreground"
                 data-active={pathname === "/admin" ? "true" : "false"}
@@ -155,7 +155,7 @@ export const Navbar = ({ session }: { session: Session | null }) => {
                 Admin
               </NextLink>
             </NavbarItem>
-          )}
+          )} */}
         </ul>
       </NavbarContent>
 
@@ -163,11 +163,11 @@ export const Navbar = ({ session }: { session: Session | null }) => {
         className="hidden sm:flex basis-1/5 sm:basis-full"
         justify="end"
       >
-        <NavbarItem className="hidden sm:flex gap-2">
+        {/* <NavbarItem className="hidden sm:flex gap-2">
           <ThemeSwitch />
-        </NavbarItem>
+        </NavbarItem> */}
         <NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem>
-        <NavbarItem className="hidden md:flex">
+        {/* <NavbarItem className="hidden md:flex">
           {
             user ? (
               <form action={logout}>
@@ -190,7 +190,7 @@ export const Navbar = ({ session }: { session: Session | null }) => {
               </div>
             )
           }
-        </NavbarItem>
+        </NavbarItem> */}
         <NavbarMenuToggle className="md:hidden" />
       </NavbarContent>
 
@@ -198,13 +198,13 @@ export const Navbar = ({ session }: { session: Session | null }) => {
         {/* <Link isExternal aria-label={siteConfig.links[2].label} href={siteConfig.links[2].href}>
           <LinkedInIcon className="text-default-500" />
         </Link> */}
-        <ThemeSwitch />
+        {/* <ThemeSwitch /> */}
         <NavbarMenuToggle />
       </NavbarContent>
 
       <NavbarMenu>
         {searchInput}
-        <div className="mx-4 mt-2 flex flex-col gap-2">
+        {/* <div className="mx-4 mt-2 flex flex-col gap-2">
           {siteConfig.navMenuItems.map((item, index) => (
             <NavbarMenuItem key={`${item}-${index}`}>
               <Link
@@ -222,6 +222,7 @@ export const Navbar = ({ session }: { session: Session | null }) => {
               </Link>
             </NavbarMenuItem>
           ))}
+
           {user && user.role === 'ADMIN' && (
             <NavbarMenuItem key={`/ADMIN`}>
               <Link
@@ -265,7 +266,7 @@ export const Navbar = ({ session }: { session: Session | null }) => {
               </NavbarMenuItem>
 
             )))}
-        </div>
+        </div> */}
       </NavbarMenu>
     </NextUINavbar>
   );
