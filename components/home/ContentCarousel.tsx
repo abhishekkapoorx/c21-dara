@@ -4,7 +4,7 @@ import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
 import Image from 'next/image';
 import { Button, Input } from '@heroui/react';
 
-const CrossfadeSlideshow = () => {
+const ContentCarousel = () => {
   const images = [
     "/images/img (1).jpeg",
     "/images/img (1).jpg",
@@ -72,4 +72,4 @@ const CrossfadeSlideshow = () => {
   );
 };
 
-export default CrossfadeSlideshow;
+export default ContentCarousel;

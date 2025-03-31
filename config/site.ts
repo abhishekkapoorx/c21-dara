@@ -13,7 +13,7 @@ export const siteConfig = {
       dropdownItems: null,
     },
     {
-      label: "Buy/Sell",
+      label: "Get Advice",
       href: null,
       dropdownItems: [
         {
