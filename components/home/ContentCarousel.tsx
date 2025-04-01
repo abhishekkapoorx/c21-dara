@@ -55,14 +55,14 @@ const ContentCarousel = () => {
         </AnimatePresence>
 
         <motion.div className='absolute bottom-0 left-0 w-full'>
-          <div className="bg-white dark:bg-black/60 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-80  rounded-2xl m-8 flex flex-col items-center justify-center px-8 py-8 gap-4 shadow-lg">
+          <div className="bg-white dark:bg-black/60 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-80  rounded-2xl  md:m-8 flex flex-col items-center justify-center px-8 py-8 gap-4 shadow-lg">
             <div className='w-full flex items-center justify-start gap-4'>
-              <h2 className='text-3xl my-4 dark:text-white text-zinc-800 font-semibold'>Find Your Dream Home</h2>
+              <h2 className='text-xl md:text-3xl my-4 dark:text-white text-zinc-800 font-semibold'>Find Your Dream Home</h2>
             </div>
             <div className="flex flex-col md:flex-row  w-full gap-4 items-center justify-between">
 
               <Input color='default' variant='faded' label="Location" placeholder="Enter Location, Property Type, MLS to Search" type="location" />
-              <Button variant="shadow" color='warning' onPress={() => { }}>Search</Button>
+              <Button variant="shadow" color='warning' className='w-full md:w-fit' onPress={() => { }}>Search</Button>
             </div>
           </div>
 

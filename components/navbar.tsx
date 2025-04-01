@@ -204,13 +204,13 @@ export const Navbar = ({ session }: { session: Session | null }) => {
 
       <NavbarMenu>
         {searchInput}
-        {/* <div className="mx-4 mt-2 flex flex-col gap-2">
+        <div className="mx-4 mt-2 flex flex-col gap-2">
           {siteConfig.navMenuItems.map((item, index) => (
             <NavbarMenuItem key={`${item}-${index}`}>
               <Link
                 color={
                   pathname === item.href
-                    ? "primary"
+                    ? "warning"
                     : "foreground"
                 }
                 href={item.href}
@@ -223,7 +223,7 @@ export const Navbar = ({ session }: { session: Session | null }) => {
             </NavbarMenuItem>
           ))}
 
-          {user && user.role === 'ADMIN' && (
+          {/* {user && user.role === 'ADMIN' && (
             <NavbarMenuItem key={`/ADMIN`}>
               <Link
                 color={
@@ -265,8 +265,8 @@ export const Navbar = ({ session }: { session: Session | null }) => {
                 </form>
               </NavbarMenuItem>
 
-            )))}
-        </div> */}
+            )))} */}
+        </div>
       </NavbarMenu>
     </NextUINavbar>
   );
