@@ -26,7 +26,7 @@ import { siteConfig } from "@/config/site";
 
 // import logout from "@/actions/logout";
 import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from "@heroui/react";
-import { IconChevronDown, IconLogin, IconLogout } from "@tabler/icons-react";
+import { IconChevronDown, IconLogin, IconLogout, IconMail, IconPhoneCall } from "@tabler/icons-react";
 import Image from "next/image";
 import { useState } from "react";
 
@@ -63,7 +63,7 @@ export const Navbar = ({ session }: { session: Session | null }) => {
 
 
   return (
-    <NextUINavbar isMenuOpen={isMenuOpen} onMenuOpenChange={setIsMenuOpen} className="py-8">
+    <NextUINavbar isMenuOpen={isMenuOpen} onMenuOpenChange={setIsMenuOpen} className="py-8 w-full" maxWidth="full">
       {/* <Logo /> */}
       <NavbarBrand as="li" className="gap-3 max-w-fit mr-4">
         <NextLink className="flex justify-center items-center gap-1 bg-center" href="/">
@@ -166,7 +166,17 @@ export const Navbar = ({ session }: { session: Session | null }) => {
         {/* <NavbarItem className="hidden sm:flex gap-2">
           <ThemeSwitch />
         </NavbarItem> */}
-        <NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem>
+        {/* <NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem> */}
+        <NavbarItem className="hidden lg:flex  gap-2 justify-end items-end">
+          <Link href="mailto:info@daradreamrealty.com" color="warning" className="flex items-center gap-2">
+            <IconMail className="text-warning" />
+            info@daradreamrealty.com
+          </Link>
+          <Link href="tel:+15551234567" color="warning" className="flex items-center gap-2">
+            <IconPhoneCall className="text-warning" />
+            +1-(555)-123-4567
+          </Link>
+        </NavbarItem>
         {/* <NavbarItem className="hidden md:flex">
           {
             user ? (
@@ -203,7 +213,7 @@ export const Navbar = ({ session }: { session: Session | null }) => {
       </NavbarContent>
 
       <NavbarMenu>
-        {searchInput}
+        {/* {searchInput} */}
         <div className="mx-4 mt-2 flex flex-col gap-2">
           {siteConfig.navMenuItems.map((item, index) => (
             <NavbarMenuItem key={`${item}-${index}`}>

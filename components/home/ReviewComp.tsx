@@ -10,7 +10,7 @@ const ReviewComp = () => {
         <div className="col-span-4 lg:col-span-1">
           <h2 className="text-2xl md:text-4xl font-regular text-center lg:text-start text-yellow-500  sticky top-32">Reviews</h2>
         </div>
-        <div className="col-span-4 lg:col-span-3 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-8">
+        <div className="col-span-4 lg:col-span-3 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-8 place-items-center">
           <ReviewCard/>
           <ReviewCard/>
           <ReviewCard/>
