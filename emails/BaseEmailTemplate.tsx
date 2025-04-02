@@ -23,9 +23,9 @@ export function BaseEmailTemplate(props: BaseTempProps) {
                                 <Row className="flex justify-between items-end">
                                     <Column className="w-[80%]">
                                         <Img
-                                            alt="illumeWork Logo"
+                                            alt="Dara Dream Realty Logo"
                                             height="24"
-                                            src={`https://illumework.com/500w/illumeWork_gray_full_white.png`}
+                                            src={`https://illumework.com/500w/Dara Dream Realty_gray_full_white.png`}
                                         />
                                     </Column>
                                     <Column align="right">

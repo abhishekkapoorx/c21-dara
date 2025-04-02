@@ -14,9 +14,9 @@ export function ContactMailAdmin(props: ContactEmailAdminProps) {
     const { name, email, phone, subject, message } = props;
     return (
         <>
-            <BaseEmailTemplate title={`${name} contacted through illumeWork | illumeWork`} preview={`${subject}`}>
+            <BaseEmailTemplate title={`${name} contacted through Dara Dream Realty | Dara Dream Realty`} preview={`${subject}`}>
                 <Section className="px-[32px] py-[20px]">
-                    <Text className="text-2xl font-bold text-white">{name} contacted through illumeWork</Text>
+                    <Text className="text-2xl font-bold text-white">{name} contacted through Dara Dream Realty</Text>
                     <Hr />
                     <Text className="text-lg">
                         Contact Details:

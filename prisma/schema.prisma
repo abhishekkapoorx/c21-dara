@@ -104,3 +104,17 @@ model Authenticator {
 
   @@unique([userId, credentialID])
 }
+
+
+model NewsletterSubscription {
+  id               String   @id @default(auto()) @map("_id") @db.ObjectId
+  fullName         String
+  email            String   @unique
+  phone            String?
+  marketUpdates    Boolean  @default(false)
+  propertyListings Boolean  @default(false)
+  tipsAdvice       Boolean  @default(false)
+  isActive         Boolean  @default(true)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}

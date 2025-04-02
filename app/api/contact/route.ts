@@ -36,17 +36,17 @@ export async function POST(request: Request) {
 
         const mailDataClient = await resend.batch.send([
             {
-                from: "illumeWork Support <support@illumework.com>",
+                from: "Dara Dream Realty Support <support@illumework.com>",
                 to: contact.email,
-                subject: `Thank You ${contact.name} for Contacting illumeWork`,
+                subject: `Thank You ${contact.name} for Contacting Dara Dream Realty`,
                 react: ContactMailClient(contact),
-                text: "Thank you for contacting illumeWork. We'll get back to you as soon as possible.",
+                text: "Thank you for contacting Dara Dream Realty. We'll get back to you as soon as possible.",
                 
             },
             {
-                from: "illumeWork Support <support@illumework.com>",
+                from: "Dara Dream Realty Support <support@illumework.com>",
                 to: process.env.ADMIN_EMAIL_NOREPLY as string,
-                subject: `${contact.name} contacted through illumeWork`,
+                subject: `${contact.name} contacted through Dara Dream Realty`,
                 react: ContactMailAdmin(contact),
                 text: `Contact Details: \nName: ${contact.name} \nEmail: ${contact.email}\nPhone: ${contact.phone}\nSubject: ${contact.subject}\nMessage: ${contact.message}`
             }

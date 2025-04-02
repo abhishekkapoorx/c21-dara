@@ -26,7 +26,7 @@ export const Logo: React.FC<IconSvgProps> = ({
         `}
       </style>
     </defs>
-    <title>illumeWork_gray_full_white</title>
+    <title>Dara Dream Realty_gray_full_white</title>
     <g data-name="Layer 2" id="Layer_2">
       <g data-name="Layer 1" id="Layer_1-2">
         <path className="cls-1" d="M24,7V5.93l.77-.77h1.18l.77.77V7l-.77.78H24.76Zm.25,1.75h2.22v8.37H24.24Z"/>
