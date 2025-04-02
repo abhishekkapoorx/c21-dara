@@ -2,6 +2,7 @@ import { Button, Input, Select, SelectItem, Slider } from '@heroui/react'
 import React, { useState } from 'react'
 import { paymentTerms } from './mortgage-calculator'
 
+
 const PurchaseCalComp = () => {
     const [purchasePrice, setPurchasePrice] = React.useState(0)
     const [downPayment, setDownPayment] = React.useState(0)
@@ -119,7 +120,7 @@ const PurchaseCalComp = () => {
                 isRequired
             >
                 {paymentTerms.map((terms) => (
-                    <SelectItem key={terms.key}>{terms.key}</SelectItem>
+                    <SelectItem key={terms.key}>{terms.label}</SelectItem>
                 ))}
             </Select>
             <Input

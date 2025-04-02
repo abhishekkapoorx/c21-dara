@@ -8,8 +8,10 @@ export default function Home() {
     <section className="flex flex-col items-center justify-center gap-4 w-full py-8 px-0 md:px-8">
 
       <ContentCarousel />
+      <ReviewComp/>
       <HeroTextComp/>
       <ReviewComp/>
+      <HeroTextComp/>
       
     </section>
   );

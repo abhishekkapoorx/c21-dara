@@ -71,7 +71,7 @@ const MortgageCalculatorComp = () => {
                     <span className="">$</span>
                 }
                 value={downPayment === 0 ? '' : downPayment > homePrice ? homePrice.toString() : downPayment.toString()}
-                onChange={(e) => {setDownPayment(Number(e.target.value))}}
+                onChange={(e) => { setDownPayment(Number(e.target.value)) }}
                 min={0.01}
                 step={0.01}
                 defaultValue='1'
@@ -152,7 +152,7 @@ const MortgageCalculatorComp = () => {
                         </div>
                         <div className="flex flex-col">
                             <span className="text-xs uppercase tracking-wider text-yellow-500 mb-1">Monthly Interest Rate</span>
-                            <span className="text-2xl font-medium">{parseFloat(outputs.monthlyInterestRate)*100}%</span>
+                            <span className="text-2xl font-medium">{parseFloat(outputs.monthlyInterestRate) * 100}%</span>
                         </div>
                         <div className="flex flex-col">
                             <span className="text-xs uppercase tracking-wider text-yellow-500 mb-1">Monthly Payment</span>
@@ -166,7 +166,7 @@ const MortgageCalculatorComp = () => {
                             <span className="text-xs uppercase tracking-wider text-yellow-500 mb-1">Total Interest</span>
                             <span className="text-2xl font-medium">${outputs.totalInterest}</span>
                         </div>
-                        
+
                     </div>
                 </div>
             )}

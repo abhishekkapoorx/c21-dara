@@ -114,7 +114,7 @@ const MortgageCalculatorComp = () => {
                 isRequired
             >
                 {paymentTerms.map((terms) => (
-                    <SelectItem key={terms.key}>{terms.key}</SelectItem>
+                    <SelectItem key={terms.key}>{terms.label}</SelectItem>
                 ))}
             </Select>
             <Input
