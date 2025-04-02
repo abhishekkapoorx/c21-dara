@@ -67,6 +67,8 @@ const PurchaseCalComp = () => {
                 onChange={(e) => setPurchasePrice(Number(e.target.value))}
                 min={0.01}
                 step={0.01}
+                required
+                isRequired
             />
             <Input
                 type="number"
@@ -81,6 +83,8 @@ const PurchaseCalComp = () => {
                 min={0.01}
                 step={0.01}
                 max={purchasePrice}
+                required
+                isRequired
             />
             <Slider
                 className="w-full"
@@ -111,6 +115,8 @@ const PurchaseCalComp = () => {
                 placeholder="Select Payment Term"
                 value={paymentTerm}
                 onChange={(e) => setPaymentTerm(Number(e.target.value))}
+                required
+                isRequired
             >
                 {paymentTerms.map((terms) => (
                     <SelectItem key={terms.key}>{terms.key}</SelectItem>
@@ -123,6 +129,8 @@ const PurchaseCalComp = () => {
                 className="w-full"
                 value={propertyTax === 0 ? '' : propertyTax.toString()}
                 onChange={(e) => setPropertyTax(Number(e.target.value))}
+                required
+                isRequired
                 endContent={
                     <span className="">%</span>
                 }
@@ -134,6 +142,8 @@ const PurchaseCalComp = () => {
                 className="w-full"
                 value={insurance === 0 ? '' : insurance.toString()}
                 onChange={(e) => setInsurance(Number(e.target.value))}
+                required
+                isRequired
                 startContent={
                     <span className="">$</span>
                 }

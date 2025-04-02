@@ -59,6 +59,8 @@ const MortgageCalculatorComp = () => {
                 min={0.01}
                 step={0.01}
                 defaultValue='1'
+                required
+                isRequired
             />
             <Input
                 type="number"
@@ -74,6 +76,8 @@ const MortgageCalculatorComp = () => {
                 step={0.01}
                 defaultValue='1'
                 max={homePrice}
+                required
+                isRequired
             />
             <Slider
                 className="w-full"
@@ -104,6 +108,8 @@ const MortgageCalculatorComp = () => {
                 placeholder="Select Payment Term"
                 value={paymentTerm}
                 onChange={(e) => setPaymentTerm(Number(e.target.value))}
+                required
+                isRequired
             >
                 {paymentTerms.map((terms) => (
                     <SelectItem key={terms.key}>{terms.label}</SelectItem>
@@ -119,6 +125,8 @@ const MortgageCalculatorComp = () => {
                 }
                 value={interestRate === 0 ? '' : interestRate.toString()}
                 onChange={(e) => setInterestRate(Number(e.target.value))}
+                required
+                isRequired
                 min={0.01}
                 step={0.01}
             />
