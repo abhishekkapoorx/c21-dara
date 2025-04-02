@@ -19,12 +19,12 @@ export const siteConfig = {
         {
           label: "Buy",
           desc: "Find your dream home",
-          href: "/buy",
+          href: "/get-advice",
         },
         {
           label: "Sell",
           desc: "Get the best price for your property",
-          href: "/sell",
+          href: "/get-advice",
         },
       ]
     },
@@ -62,11 +62,11 @@ export const siteConfig = {
     },
     {
       label: "Buy",
-      href: "/buy",
+      href: "/get-advice",
     },
     {
       label: "Sell",
-      href: "/sell",
+      href: "/get-advice",
     },
     {
       label: "Ebooks",

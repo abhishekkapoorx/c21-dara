@@ -50,10 +50,9 @@ export default async function RootLayout({
         <SpeedInsights />
         <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
           <div className="relative flex flex-col min-h-screen">
-            <Navbar session={session}/>
+            <Navbar session={session}/>            
             
-            
-            <main className="px-4 flex-grow w-full">
+            <main className="px-4 flex flex-grow w-full justify-center items-start">
               {children}
             </main>
           </div>

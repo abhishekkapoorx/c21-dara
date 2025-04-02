@@ -29,6 +29,7 @@ import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from "@heroui/r
 import { IconChevronDown, IconLogin, IconLogout, IconMail, IconPhoneCall } from "@tabler/icons-react";
 import Image from "next/image";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 
 
@@ -36,7 +37,8 @@ export const Navbar = ({ session }: { session: Session | null }) => {
 
   const pathname = usePathname();
   const user = session?.user
-
+  
+  const router = useRouter();
 
   const searchInput = (
     <Input
@@ -122,9 +124,10 @@ export const Navbar = ({ session }: { session: Session | null }) => {
                     <DropdownItem
                       key={dropdownItem.label}
                       description={dropdownItem.desc}
+                      onPress={() => router.push(dropdownItem.href)}
                     >
 
-                      <NextLink
+                      {/* <NextLink
                         className={clsx(
                           linkStyles({ color: "foreground" }),
                           "data-[active=true]:text-yellow-500 data-[active=true]:font-medium",
@@ -132,9 +135,9 @@ export const Navbar = ({ session }: { session: Session | null }) => {
                         color="foreground"
                         data-active={pathname === item.href ? "true" : "false"}
                         href={dropdownItem.href}
-                      >
+                      > */}
                         {dropdownItem.label}
-                      </NextLink>
+                      {/* </NextLink> */}
                     </DropdownItem>
                   )) as any}
                 </DropdownMenu>
