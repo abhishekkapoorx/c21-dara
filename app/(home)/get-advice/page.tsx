@@ -1,11 +1,12 @@
 "use client";
+import { Heading } from '@/components/TextComps';
 import { Tab, Tabs } from '@heroui/tabs';
 import React from 'react'
 
 const GetAdvice = () => {
     return (
         <div className="flex flex-col items-center justify-center gap-8 max-w-2xl w-full">
-            <h1 className="text-4xl font-light">Get Advice</h1>
+            <Heading title='Get Advice'/>
 
             <Tabs color='warning' fullWidth={true} className="w-full">
                 <Tab title="Buyers" className="w-full">
