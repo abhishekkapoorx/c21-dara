@@ -38,9 +38,9 @@ export const siteConfig = {
           href: "/ebooks",
         },
         {
-          label: "Mortgage Calculator",
-          desc: "Calculate your mortgage payments",
-          href: "/mortgage-calculator",
+          label: "Calculators",
+          desc: "Calculate your payments",
+          href: "/calculators",
         },
         {
           label: "NewsLetter",
@@ -73,8 +73,8 @@ export const siteConfig = {
       href: "/ebooks",
     },
     {
-      label: "Mortgage Calculator",
-      href: "/mortgage-calculator",
+      label: "Calculators",
+      href: "/calculators",
     },
     {
       label: "NewsLetter",
