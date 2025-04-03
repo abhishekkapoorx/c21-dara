@@ -14,7 +14,7 @@ const HeroTextComp = () => {
             Dara Dream Realty
           </h1>
           <p className="text-xl md:text-2xl col-span-2 lg:col-span-1 font-light text-zinc-800 dark:text-white lg:text-start text-center">
-            Your trusted partner in real estate, backed by Century 21's legacy of excellence. Karandeep Dara brings expertise and dedication to every transaction.
+            Your trusted partner in real estate, backed by Century 21&apos;s legacy of excellence. Karandeep Dara brings expertise and dedication to every transaction.
           </p>
         </div>
         <div className="col-span-4 lg:col-span-1 flex items-center justify-center gap-4">

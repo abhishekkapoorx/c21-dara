@@ -57,7 +57,7 @@ export default async function NewsLetterSignUp(prevState: any, formdata: FormDat
                 from: 'Dara Dream Realty <onboarding@resend.dev>',
                 to: data.email,
                 subject: `Thank You ${data.fullName} for Subscribing to our Newsletter`,
-                react: <div>Thank you for subscribing to our newsletter. We'll keep you updated with the latest news and updates.</div>,
+                react: <div>Thank you for subscribing to our newsletter. We&apos;ll keep you updated with the latest news and updates.</div>,
                 text: `Thank you for subscribing to our newsletter. We'll keep you updated with the latest news and updates.`
             },
             {

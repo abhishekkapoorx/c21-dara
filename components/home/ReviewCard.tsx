@@ -28,7 +28,7 @@ export default function ReviewCard() {
       </CardHeader>
       <Divider />
       <CardBody>
-        <p>Selling my home felt overwhelming, but [Realtor Name] made it stress-free. They provided expert advice, staged my home beautifully, and got multiple offers within days. I couldn't have asked for a better experience!</p>
+        <p>Selling my home felt overwhelming, but [Realtor Name] made it stress-free. They provided expert advice, staged my home beautifully, and got multiple offers within days. I couldn&apos;t have asked for a better experience!</p>
       </CardBody>
       <Divider />
       <CardFooter>
