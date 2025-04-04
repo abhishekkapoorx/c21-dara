@@ -11,6 +11,7 @@ import { Navbar } from "@/components/navbar";
 import { fontSans } from "@/config/fonts";
 import { siteConfig } from "@/config/site";
 import FloatingIcons from "@/components/floatingIcons";
+import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: {
@@ -56,6 +57,7 @@ export default async function RootLayout({
             <main className="flex flex-grow w-full justify-center items-start">
               {children}
             </main>
+            <Footer />
           </div>
         </Providers>
       </body>
