@@ -1,5 +1,6 @@
 "use client";
 import HomeBuyers from '@/components/get-advice/HomeBuyers';
+import HomeEvaluation from '@/components/get-advice/HomeEvaluation';
 import HomeSeller from '@/components/get-advice/HomeSeller';
 import { Heading } from '@/components/TextComps';
 import { Tab, Tabs } from '@heroui/tabs';
@@ -18,6 +19,7 @@ const GetAdvice = () => {
                     <HomeSeller/>
                 </Tab>
                 <Tab title="Free Home Evaluation" className="w-full">
+                    <HomeEvaluation/>
                 </Tab>
             </Tabs>
         </div>
