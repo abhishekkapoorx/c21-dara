@@ -1,4 +1,5 @@
 "use client";
+import HomeBuyers from '@/components/get-advice/HomeBuyers';
 import { Heading } from '@/components/TextComps';
 import { Tab, Tabs } from '@heroui/tabs';
 import React from 'react'
@@ -9,9 +10,10 @@ const GetAdvice = () => {
             <Heading title='Get Advice'/>
 
             <Tabs color='warning' fullWidth={true} className="w-full">
-                <Tab title="Buyers" className="w-full">
+                <Tab title="Home Buyers" className="w-full">
+                    <HomeBuyers/>
                 </Tab>
-                <Tab title="Sellers" className="w-full">
+                <Tab title="Home Sellers" className="w-full">
                 </Tab>
                 <Tab title="Free Home Evaluation" className="w-full">
                 </Tab>
