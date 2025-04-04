@@ -65,7 +65,7 @@ export const Navbar = ({ session }: { session: Session | null }) => {
 
 
   return (
-    <NextUINavbar isMenuOpen={isMenuOpen} onMenuOpenChange={setIsMenuOpen} className="py-8 w-full" maxWidth="full">
+    <NextUINavbar isMenuOpen={isMenuOpen} onMenuOpenChange={setIsMenuOpen} className="md:py-6 w-full" maxWidth="full">
       {/* <Logo /> */}
       <NavbarBrand as="li" className="gap-3 max-w-fit mr-4">
         <NextLink className="flex justify-center items-center gap-1 bg-center" href="/">
