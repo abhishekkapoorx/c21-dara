@@ -1,4 +1,5 @@
 import Spline from '@splinetool/react-spline'
+import Image from 'next/image'
 import React from 'react'
 
 const HeroTextComp = () => {
@@ -17,10 +18,14 @@ const HeroTextComp = () => {
             Your trusted partner in real estate, backed by Century 21&apos;s legacy of excellence. Karandeep Dara brings expertise and dedication to every transaction.
           </p>
         </div>
-        <div className="col-span-4 lg:col-span-1 flex items-center justify-center gap-4">
-          {/* <Spline
-            scene="https://prod.spline.design/gy5gzKrNKHiAeqrI/scene.splinecode"
-          /> */}
+        <div className="col-span-4 lg:col-span-1 flex items-center justify-center gap-4 rounded-full ">
+          <Image
+            src={"/images/img (11).PNG"}
+            alt="Dara Dream Realtor"
+            width={300}
+            height={300}
+            className="rounded-full shadow-lg bg-center object-cover w-52 h-52 lg:w-72 lg:h-72 m-2" 
+          />
         </div>
       </div>
     </div>
