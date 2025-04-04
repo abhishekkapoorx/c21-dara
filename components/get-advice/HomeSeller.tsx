@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
-import { Heading } from '../TextComps'
 import { Button, Input, Select, SelectItem, Textarea } from '@heroui/react'
+import { useState } from 'react'
 import { timeframes } from './HomeBuyers'
 
 
@@ -29,7 +28,7 @@ const HomeSeller = () => {
       timeframe,
       additionalInfo
     })
-    
+
     // Show success message
     setIsSubmitted(true)
   }
@@ -37,7 +36,7 @@ const HomeSeller = () => {
   return (
     <div className="flex flex-col items-center justify-center gap-8 max-w-2xl w-full">
       {/* <Heading title='Home Seller Consultations'/> */}
-      
+
       {!isSubmitted ? (
         <>
           <Input
@@ -50,7 +49,7 @@ const HomeSeller = () => {
             required
             isRequired
           />
-          
+
           <Input
             type="email"
             placeholder="your.email@example.com"
@@ -61,7 +60,7 @@ const HomeSeller = () => {
             required
             isRequired
           />
-          
+
           <Input
             type="tel"
             placeholder="(555) 123-4567"
@@ -72,7 +71,7 @@ const HomeSeller = () => {
             required
             isRequired
           />
-          
+
           <Input
             type="text"
             placeholder="123 Main Street, City, State, ZIP"
@@ -83,7 +82,7 @@ const HomeSeller = () => {
             required
             isRequired
           />
-          
+
           <div className="w-full">
             <div className="block text-sm font-medium mb-2" >Property Details</div>
             <div className="grid grid-cols-3 gap-4">
@@ -95,8 +94,10 @@ const HomeSeller = () => {
                 value={bedrooms}
                 onChange={(e) => setBedrooms(e.target.value)}
                 min={0}
+                required
+                isRequired
               />
-              
+
               <Input
                 type="number"
                 placeholder="Bathrooms"
@@ -105,8 +106,10 @@ const HomeSeller = () => {
                 value={bathrooms}
                 onChange={(e) => setBathrooms(e.target.value)}
                 min={0}
+                required
+                isRequired
               />
-              
+
               <Input
                 type="number"
                 placeholder="Square Feet"
@@ -116,22 +119,26 @@ const HomeSeller = () => {
                 onChange={(e) => setSquareFeet(e.target.value)}
                 min={0}
                 step={0.01}
+                required
+                isRequired
               />
             </div>
           </div>
-          
+
           <Select
             className="w-full"
             label="When do you plan to sell?"
             placeholder="Select Timeframe"
             value={timeframe}
             onChange={(e) => setTimeframe(e.target.value)}
+            required
+            isRequired
           >
             {timeframes.map((time) => (
               <SelectItem key={time.key}>{time.label}</SelectItem>
             ))}
           </Select>
-          
+
           <Textarea
             label="Additional Information"
             placeholder="Tell us more about your property and selling goals..."
@@ -139,12 +146,12 @@ const HomeSeller = () => {
             value={additionalInfo}
             onChange={(e) => setAdditionalInfo(e.target.value)}
           />
-          
-          <Button 
-            title='Submit Request' 
-            color='warning' 
-            variant='solid' 
-            className="w-full" 
+
+          <Button
+            title='Submit Request'
+            color='warning'
+            variant='solid'
+            className="w-full"
             onPress={handleSubmit}
           >
             Submit Request

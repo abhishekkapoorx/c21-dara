@@ -30,7 +30,7 @@ const HomeEvaluation = () => {
       yearBuilt,
       additionalInfo
     })
-    
+
     // Show success message
     setIsSubmitted(true)
   }
@@ -38,7 +38,7 @@ const HomeEvaluation = () => {
   return (
     <div className="flex flex-col items-center justify-center gap-8 max-w-2xl w-full">
       {/* <Heading title='Home Evaluation Request'/> */}
-      
+
       {!isSubmitted ? (
         <>
           <Input
@@ -51,7 +51,7 @@ const HomeEvaluation = () => {
             required
             isRequired
           />
-          
+
           <Input
             type="email"
             placeholder="your.email@example.com"
@@ -62,7 +62,7 @@ const HomeEvaluation = () => {
             required
             isRequired
           />
-          
+
           <Input
             type="tel"
             placeholder="(555) 123-4567"
@@ -73,7 +73,7 @@ const HomeEvaluation = () => {
             required
             isRequired
           />
-          
+
           <Input
             type="text"
             placeholder="123 Main Street, City, State, ZIP"
@@ -84,7 +84,7 @@ const HomeEvaluation = () => {
             required
             isRequired
           />
-          
+
           <Select
             className="w-full"
             label="Property Type"
@@ -98,7 +98,7 @@ const HomeEvaluation = () => {
               <SelectItem key={type.key}>{type.label}</SelectItem>
             ))}
           </Select>
-          
+
           <div className="w-full">
             <div className="block text-sm font-medium mb-2">Property Details</div>
             <div className="grid grid-cols-3 gap-4">
@@ -110,8 +110,10 @@ const HomeEvaluation = () => {
                 value={bedrooms}
                 onChange={(e) => setBedrooms(e.target.value)}
                 min={0}
+                required
+                isRequired
               />
-              
+
               <Input
                 type="number"
                 placeholder="Bathrooms"
@@ -120,8 +122,10 @@ const HomeEvaluation = () => {
                 value={bathrooms}
                 onChange={(e) => setBathrooms(e.target.value)}
                 min={0}
+                required
+                isRequired
               />
-              
+
               <Input
                 type="number"
                 placeholder="Square Feet"
@@ -131,21 +135,25 @@ const HomeEvaluation = () => {
                 onChange={(e) => setSquareFeet(e.target.value)}
                 min={0}
                 step={0.01}
+                required
+                isRequired
               />
             </div>
           </div>
-          
+
           <Input
             type="number"
             placeholder="Year Built"
             label="Year Built"
             className="w-full"
-            value={yearBuilt === '' || Number(yearBuilt) > new Date().getFullYear() ? new Date().getFullYear().toString() : yearBuilt}
+            value={Number(yearBuilt) < 1800 || Number(yearBuilt) > new Date().getFullYear() ? new Date().getFullYear().toString() : yearBuilt}
             onChange={(e) => setYearBuilt(e.target.value === '' ? '' : Math.min(new Date().getFullYear(), parseInt(e.target.value) || 0).toString())}
             min={1800}
             max={new Date().getFullYear()}
+            required
+            isRequired
           />
-          
+
           <Textarea
             label="Additional Information"
             placeholder="Tell us more about your property, recent upgrades, special features, etc..."
@@ -153,12 +161,12 @@ const HomeEvaluation = () => {
             value={additionalInfo}
             onChange={(e) => setAdditionalInfo(e.target.value)}
           />
-          
-          <Button 
-            title='Request Evaluation' 
-            color='warning' 
-            variant='solid' 
-            className="w-full" 
+
+          <Button
+            title='Request Evaluation'
+            color='warning'
+            variant='solid'
+            className="w-full"
             onPress={handleSubmit}
           >
             Request Evaluation

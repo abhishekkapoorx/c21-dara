@@ -2,11 +2,12 @@
 import NewsLetterSignUp from '@/actions/NewsLetterSignUpAction'
 import { Heading } from '@/components/TextComps'
 import { addToast, Button, Checkbox, Form, Input } from '@heroui/react'
+import Link from 'next/link'
 import { useActionState, useEffect } from 'react'
 import { useFormState } from 'react-dom'
 
 const NeweletterPage = () => {
-    
+
     const [state, formAction, isPending] = useFormState(NewsLetterSignUp, null)
     useEffect(() => {
         if (state && state.success) {
@@ -25,7 +26,7 @@ const NeweletterPage = () => {
             })
         }
     }, [state])
-    
+
     return (
         <div className="flex flex-col items-center justify-center gap-8 max-w-2xl w-full">
             <Heading title='Subscribe Newsletter' />
@@ -86,7 +87,19 @@ const NeweletterPage = () => {
                         color={"warning"}
                     >Tips & Advice</Checkbox>
                 </div>
-                
+                <Checkbox
+                    type="checkbox"
+                    className="w-full"
+                    name='privacyPolicy'
+                    defaultSelected={true}
+                    color={"warning"}
+                    required
+                    isRequired
+                >
+                    I agree to receive emails and accept the&nbsp;
+                    <Link href={"/"} className='text-yellow-600'>Privacy Policy</Link>
+                </Checkbox>
+
 
 
                 <Button color='warning' variant='shadow' type='submit' isDisabled={isPending} isLoading={isPending}>Subscribe</Button>
