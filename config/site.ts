@@ -4,8 +4,8 @@ import { dropdown, dropdownItem } from "@heroui/theme";
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-  name: "C21 Canada",
-  description: "Transforming visions into reality with innovative web development, mobile apps, and captivating graphic design. Elevate your digital presence today.",
+  name: "Dara Dream Realty | Century 21",
+  description: "Your trusted partner in real estate, backed by Century 21's legacy of excellence. Karandeep Dara brings expertise and dedication to every transaction.",
   navItems: [
     {
       label: "Home",
