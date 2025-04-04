@@ -171,12 +171,12 @@ export const Navbar = ({ session }: { session: Session | null }) => {
         </NavbarItem> */}
         {/* <NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem> */}
         <NavbarItem className="hidden lg:flex  gap-2 justify-end items-end">
-          <Link href="mailto:info@daradreamrealty.com" color="warning" className="flex items-center gap-2">
-            <IconMail className="text-warning" />
+          <Link href="mailto:info@daradreamrealty.com" color="foreground" className="flex items-center gap-2">
+            <IconMail className="text-white" />
             info@daradreamrealty.com
           </Link>
-          <Link href="tel:+15551234567" color="warning" className="flex items-center gap-2">
-            <IconPhoneCall className="text-warning" />
+          <Link href="tel:+15551234567" color="foreground" className="flex items-center gap-2">
+            <IconPhoneCall className="text-white" />
             +1-(555)-123-4567
           </Link>
         </NavbarItem>
