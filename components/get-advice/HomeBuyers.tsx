@@ -2,14 +2,14 @@ import React, { useState } from 'react'
 import { Heading } from '../TextComps'
 import { Button, Input, Select, SelectItem, Textarea } from '@heroui/react'
 
-const budgetRanges = [
+export const budgetRanges = [
   { key: 'Under 500000', label: 'Under $500,000' },
   { key: '500-1000000', label: '$500,000 - $1,000,000' },
   { key: '1000000-2000000', label: '$1,000,000 - $2,000,000' },
   { key: '2000000+', label: '2,000,000+' },
 ]
 
-const propertyTypes = [
+export const propertyTypes = [
   { key: 'condo', label: 'Condo' },
   { key: 'condo-townhouse', label: 'Condo Townhouse' },
   { key: 'townhouse', label: 'Townhouse' },
@@ -18,7 +18,7 @@ const propertyTypes = [
   { key: 'bungalow', label: 'Bungalow' },
 ]
 
-const timeframes = [
+export const timeframes = [
   { key: 'immediate', label: 'Immediately' },
   { key: '1-3months', label: '1-3 months' },
   { key: '3-6months', label: '3-6 months' },
@@ -143,7 +143,7 @@ const HomeBuyers = () => {
                     <Button 
                         title='Submit Request' 
                         color='warning' 
-                        variant='shadow' 
+                        variant='solid' 
                         className="w-full" 
                         onPress={handleSubmit}
                     >

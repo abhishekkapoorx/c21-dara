@@ -6,6 +6,7 @@ function Loading() {
       <Progress
         size="sm"
         isIndeterminate
+        color="warning"
         aria-label="Loading..."
         className="max-w-md"
       />

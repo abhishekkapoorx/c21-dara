@@ -12,7 +12,7 @@ interface GetAdviceLayoutProps {
 
 export default async function GetAdviceLayout({ children }: GetAdviceLayoutProps) {
     return (
-        <section className="container flex items-center justify-center py-8">
+        <section className="container flex items-center justify-center py-8 px-4">
             {children}
         </section>
     );

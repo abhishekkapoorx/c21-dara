@@ -8,6 +8,7 @@ function Loading() {
       isIndeterminate
       aria-label="Loading..."
       className="max-w-md"
+      color="warning"
     />
     </div>
   )
