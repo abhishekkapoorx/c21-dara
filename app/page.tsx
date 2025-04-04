@@ -5,7 +5,7 @@ import ReviewComp from "@/components/home/ReviewComp";
 
 export default function Home() {
   return (
-    <section className="flex flex-col items-center justify-center gap-4 w-full py-8 px-0 md:px-8">
+    <section className="flex flex-col items-center justify-center gap-4 w-full py-8 px-0">
 
       <ContentCarousel />
       <HeroTextComp/>

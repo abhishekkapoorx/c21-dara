@@ -14,22 +14,11 @@ export const siteConfig = {
     },
     {
       label: "Get Advice",
-      href: null,
-      dropdownItems: [
-        {
-          label: "Buy",
-          desc: "Find your dream home",
-          href: "/get-advice",
-        },
-        {
-          label: "Sell",
-          desc: "Get the best price for your property",
-          href: "/get-advice",
-        },
-      ]
+      href: "/get-advice",
+      dropdownItems: null
     },
     {
-      label: "More",
+      label: "Tools",
       href: null,
       dropdownItems: [
         {
@@ -42,18 +31,18 @@ export const siteConfig = {
           desc: "Calculate your payments",
           href: "/calculators",
         },
-        {
-          label: "NewsLetter",
-          desc: "Subscribe to our newsletter",
-          href: "/newsletter",
-        },
+        // {
+        //   label: "NewsLetter",
+        //   desc: "Subscribe to our newsletter",
+        //   href: "/newsletter",
+        // },
       ]
     },
-    // {
-    //   label: "NewsLetter",
-    //   href: "/newsletter",
-    //   dropdownItems: null,
-    // },
+    {
+      label: "NewsLetter",
+      href: "/newsletter",
+      dropdownItems: null,
+    },
   ],
   navMenuItems: [
     {
@@ -61,11 +50,7 @@ export const siteConfig = {
       href: "/",
     },
     {
-      label: "Buy",
-      href: "/get-advice",
-    },
-    {
-      label: "Sell",
+      label: "Get Advice",
       href: "/get-advice",
     },
     {

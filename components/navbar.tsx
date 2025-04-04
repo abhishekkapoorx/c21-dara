@@ -163,7 +163,7 @@ export const Navbar = ({ session }: { session: Session | null }) => {
       </NavbarContent>
 
       <NavbarContent
-        className="hidden sm:flex basis-1/5 sm:basis-full"
+        className="hidden sm:flex basis-1/5 sm:basis-full w-fit"
         justify="end"
       >
         {/* <NavbarItem className="hidden sm:flex gap-2">

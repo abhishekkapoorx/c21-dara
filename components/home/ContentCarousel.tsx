@@ -30,7 +30,7 @@ const ContentCarousel = () => {
 
 
   return (
-      <div className="relative w-full h-[80vh] overflow-hidden rounded-2xl bg-bottom">
+      <div className="relative w-full h-[80vh] overflow-hidden bg-bottom">
         {/* Slideshow with crossfade effect */}
         <AnimatePresence>
           <motion.div
@@ -39,7 +39,7 @@ const ContentCarousel = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 1.5, ease: "easeInOut" }}
-            className="absolute inset-0 rounded-2xl"
+            className="absolute inset-0"
           // style={{ y: y1, scale: 1.2 }}
           >
 
@@ -48,21 +48,21 @@ const ContentCarousel = () => {
               alt={`Slide ${currentIndex + 1}`}
               fill
               style={{ objectFit: "cover", backgroundPosition: "bottom" }}
-              className='rounded-2xl w-full'
+              className=' w-full'
               priority
             />
           </motion.div>
         </AnimatePresence>
 
         <motion.div className='absolute bottom-0 left-0 w-full'>
-          <div className="bg-white dark:bg-black/60 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-80  rounded-2xl  md:m-8 flex flex-col items-center justify-center px-8 py-8 gap-4 shadow-lg">
-            <div className='w-full flex items-center justify-start gap-4'>
-              <h2 className='text-xl md:text-3xl my-4 dark:text-white text-zinc-800 font-semibold'>Find Your Dream Home</h2>
+          <div className="bg-white dark:bg-black/10 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-20  rounded-t-2xl flex flex-col items-center justify-center px-8 py-8 gap-4 shadow-lg">
+            <div className='w-full flex items-center justify-center gap-4'>
+              <h2 className='text-xl md:text-3xl my-4 dark:text-white text-zinc-800 font-semibold text-center'>Find Your Dream Home</h2>
             </div>
             <div className="flex flex-col md:flex-row  w-full gap-4 items-center justify-between">
 
               <Input color='default' variant='faded' label="Location" placeholder="Enter Location, Property Type, MLS to Search" type="location" />
-              <Button variant="shadow" color='warning' className='w-full md:w-fit' onPress={() => { }}>Search</Button>
+              <Button variant="solid" color='warning' className='w-full md:w-fit' onPress={() => { }}>Search</Button>
             </div>
           </div>
 

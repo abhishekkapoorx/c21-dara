@@ -10,6 +10,7 @@ import { auth } from "@/auth";
 import { Navbar } from "@/components/navbar";
 import { fontSans } from "@/config/fonts";
 import { siteConfig } from "@/config/site";
+import FloatingIcons from "@/components/floatingIcons";
 
 export const metadata: Metadata = {
   title: {
@@ -51,8 +52,8 @@ export default async function RootLayout({
         <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
           <div className="relative flex flex-col min-h-screen">
             <Navbar session={session}/>            
-            
-            <main className="px-4 flex flex-grow w-full justify-center items-start">
+            <FloatingIcons/>
+            <main className="flex flex-grow w-full justify-center items-start">
               {children}
             </main>
           </div>

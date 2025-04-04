@@ -4,7 +4,7 @@ import ReviewCard from './ReviewCard'
 
 const ReviewComp = () => {
   return (
-    <div className="flex items-center justify-center w-full py-16 min-h-[80vh]">
+    <div className="flex items-center justify-center w-full py-16 min-h-[80vh] px-8">
       <div className="grid grid-cols-4 gap-4 md:gap-8 w-full">
 
         <div className="col-span-4 lg:col-span-1">
