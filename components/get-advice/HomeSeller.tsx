@@ -85,7 +85,7 @@ const HomeSeller = () => {
           />
           
           <div className="w-full">
-            <label className="block text-sm font-medium mb-2">Property Details</label>
+            <div className="block text-sm font-medium mb-2" >Property Details</div>
             <div className="grid grid-cols-3 gap-4">
               <Input
                 type="number"

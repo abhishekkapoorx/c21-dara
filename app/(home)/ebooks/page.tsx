@@ -9,7 +9,7 @@ const EbookPage = () => {
             <Heading title='Download Ebooks'/>
 
             <div className="w-full">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+                <div className="grid grid-cols-1 gap-6 mt-8">
                     {[
                         {
                             title: "Home Buying 101",

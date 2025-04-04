@@ -100,7 +100,7 @@ const HomeEvaluation = () => {
           </Select>
           
           <div className="w-full">
-            <label className="block text-sm font-medium mb-2">Property Details</label>
+            <div className="block text-sm font-medium mb-2">Property Details</div>
             <div className="grid grid-cols-3 gap-4">
               <Input
                 type="number"
@@ -168,7 +168,7 @@ const HomeEvaluation = () => {
         <div className="w-full p-8 border-0 shadow-sm rounded-lg mt-8 text-center">
           <h3 className="text-2xl font-bold mb-6 tracking-tight">Thank You!</h3>
           <p className="text-lg mb-4">Your home evaluation request has been submitted.</p>
-          <p>A real estate professional will contact you shortly to discuss your property's market value.</p>
+          <p>A real estate professional will contact you shortly to discuss your property&apos;s market value.</p>
           <Button
             title='Submit Another Request'
             color='warning'
