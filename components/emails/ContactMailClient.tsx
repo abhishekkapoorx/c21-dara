@@ -19,7 +19,7 @@ export function ContactMailClient(props: ContactEmailProps) {
                         Hi {name},
                     </Text>
                     <Text className="text-base">
-                        Thank you for reaching out to us. We're glad you've chosen to contact us about &apos;<em>{subject}</em>&apos;. Your message is important to us, and we'll respond as soon as possible.
+                        Thank you for reaching out to us. We&apos;re glad you&apos;ve chosen to contact us about &apos;<em>{subject}</em>&apos;. Your message is important to us, and we&apos;ll respond as soon as possible.
                     </Text>
                     <Text className="text-base">
                         Regards,
