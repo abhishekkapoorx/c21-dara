@@ -1,191 +1,210 @@
-import { Button, Input, Select, SelectItem, Textarea } from '@heroui/react'
-import { useState } from 'react'
-import { timeframes } from './HomeBuyers'
+import { Button, Input, Select, SelectItem, Textarea, addToast } from '@heroui/react';
+import { Formik, Form as FormikForm } from 'formik';
+import * as Yup from 'yup';
+import { timeframes } from './HomeBuyers';
+import { db } from '@/firebase';
+import { addDoc, collection } from 'firebase/firestore';
 
+interface HomeSellerFormValues {
+  fullName: string;
+  email: string;
+  phone: string;
+  propertyAddress: string;
+  bedrooms: string | number;
+  bathrooms: string | number;
+  squareFeet: string | number;
+  timeframe: string;
+  additionalInfo: string;
+}
+
+interface FormikSubmitProps {
+  resetForm: () => void;
+  setSubmitting: (isSubmitting: boolean) => void;
+}
 
 const HomeSeller = () => {
-  const [fullName, setFullName] = useState('')
-  const [email, setEmail] = useState('')
-  const [phone, setPhone] = useState('')
-  const [propertyAddress, setPropertyAddress] = useState('')
-  const [bedrooms, setBedrooms] = useState('')
-  const [bathrooms, setBathrooms] = useState('')
-  const [squareFeet, setSquareFeet] = useState('')
-  const [timeframe, setTimeframe] = useState('')
-  const [additionalInfo, setAdditionalInfo] = useState('')
-  const [isSubmitted, setIsSubmitted] = useState(false)
+  const initialValues: HomeSellerFormValues = {
+    fullName: '',
+    email: '',
+    phone: '',
+    propertyAddress: '',
+    bedrooms: '',
+    bathrooms: '',
+    squareFeet: '',
+    timeframe: '',
+    additionalInfo: ''
+  };
 
-  const handleSubmit = () => {
-    // Here you would typically send the form data to your backend
-    console.log({
-      fullName,
-      email,
-      phone,
-      propertyAddress,
-      bedrooms,
-      bathrooms,
-      squareFeet,
-      timeframe,
-      additionalInfo
-    })
+  const validationSchema = Yup.object().shape({
+    fullName: Yup.string().required('Full name is required'),
+    email: Yup.string().email('Invalid email').required('Email is required'),
+    phone: Yup.string().required('Phone number is required').min(10, 'Phone number must be at least 10 digits').max(11, 'Phone number must be at most 11 digits'),
+    propertyAddress: Yup.string().required('Property address is required'),
+    bedrooms: Yup.number().min(0, 'Bedrooms must be at least 0').required('Bedrooms are required'),
+    bathrooms: Yup.number().min(0, 'Bathrooms must be at least 0').required('Bathrooms are required'),
+    squareFeet: Yup.number().min(0, 'Square feet must be at least 0').required('Square feet are required'),
+    timeframe: Yup.string().required('Timeframe is required'),
+    additionalInfo: Yup.string()
+  });
 
-    // Show success message
-    setIsSubmitted(true)
-  }
+  const handleSubmit = async (
+    values: HomeSellerFormValues, 
+    { resetForm, setSubmitting }: FormikSubmitProps
+  ) => {
+    setSubmitting(true);
+    try {
+      await addDoc(collection(db, 'homeSellers'), {
+        ...values,
+        createdAt: new Date()
+      });
+      
+      resetForm();
+      
+      // Show success toast
+      addToast({
+        title: "Success",
+        description: "Your home selling consultation request has been submitted.",
+        color: "success",
+      });
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      
+      // Show error toast
+      addToast({
+        title: "Error",
+        description: "Failed to submit your request. Please try again later.",
+        color: "danger"
+      });
+    }
+    setSubmitting(false);
+  };
 
   return (
     <div className="flex flex-col items-center justify-center gap-8 max-w-2xl w-full">
-      {/* <Heading title='Home Seller Consultations'/> */}
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={handleSubmit}
+      >
+        {({ values, errors, touched, handleChange, isSubmitting, isValid }) => (
+          <FormikForm className="flex flex-col items-center justify-center gap-8 max-w-2xl w-full">
+            <Input
+              type="text"
+              placeholder="Your Full Name"
+              name="fullName"
+              label="Full Name"
+              value={values.fullName}
+              onChange={handleChange}
+              errorMessage={errors.fullName ? errors.fullName : undefined}
+              isInvalid={errors.fullName != undefined}
+            />
 
-      {!isSubmitted ? (
-        <>
-          <Input
-            type="text"
-            placeholder="Your Full Name"
-            label="Full Name"
-            className="w-full"
-            value={fullName}
-            onChange={(e) => setFullName(e.target.value)}
-            required
-            isRequired
-          />
+            <Input
+              type="email"
+              placeholder="your.email@example.com"
+              name="email"
+              label="Email Address"
+              value={values.email}
+              onChange={handleChange}
+              errorMessage={errors.email ? errors.email : undefined}
+              isInvalid={errors.email != undefined}
+            />
 
-          <Input
-            type="email"
-            placeholder="your.email@example.com"
-            label="Email Address"
-            className="w-full"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            isRequired
-          />
+            <Input
+              type="tel"
+              placeholder="(555) 123-4567"
+              name="phone"
+              label="Phone Number"
+              value={values.phone}
+              onChange={handleChange}
+              errorMessage={errors.phone ? errors.phone : undefined}
+              isInvalid={errors.phone != undefined}
+            />
 
-          <Input
-            type="tel"
-            placeholder="(555) 123-4567"
-            label="Phone Number"
-            className="w-full"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            required
-            isRequired
-          />
+            <Input
+              type="text"
+              placeholder="123 Main Street, City, State, ZIP"
+              name="propertyAddress"
+              label="Property Address"
+              value={values.propertyAddress}
+              onChange={handleChange}
+              errorMessage={errors.propertyAddress ? errors.propertyAddress : undefined}
+              isInvalid={errors.propertyAddress != undefined}
+            />
 
-          <Input
-            type="text"
-            placeholder="123 Main Street, City, State, ZIP"
-            label="Property Address"
-            className="w-full"
-            value={propertyAddress}
-            onChange={(e) => setPropertyAddress(e.target.value)}
-            required
-            isRequired
-          />
-
-          <div className="w-full">
-            <div className="block text-sm font-medium mb-2" >Property Details</div>
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-3 gap-4 w-full">
               <Input
                 type="number"
                 placeholder="Bedrooms"
-                aria-label="Bedrooms"
-                className="w-full"
-                value={bedrooms}
-                onChange={(e) => setBedrooms(e.target.value)}
-                min={0}
-                required
-                isRequired
+                name="bedrooms"
+                label="Bedrooms"
+                value={String(values.bedrooms)}
+                onChange={handleChange}
+                errorMessage={errors.bedrooms ? errors.bedrooms : undefined}
+                isInvalid={errors.bedrooms != undefined}
               />
 
               <Input
                 type="number"
                 placeholder="Bathrooms"
-                aria-label="Bathrooms"
-                className="w-full"
-                value={bathrooms}
-                onChange={(e) => setBathrooms(e.target.value)}
-                min={0}
-                required
-                isRequired
+                name="bathrooms"
+                label="Bathrooms"
+                value={String(values.bathrooms)}
+                onChange={handleChange}
+                errorMessage={errors.bathrooms ? errors.bathrooms : undefined}
+                isInvalid={errors.bathrooms != undefined}
               />
 
               <Input
                 type="number"
                 placeholder="Square Feet"
-                aria-label="Square Feet"
-                className="w-full"
-                value={squareFeet}
-                onChange={(e) => setSquareFeet(e.target.value)}
-                min={0}
-                step={0.01}
-                required
-                isRequired
+                name="squareFeet"
+                label="Square Feet"
+                value={String(values.squareFeet)}
+                onChange={handleChange}
+                errorMessage={errors.squareFeet ? errors.squareFeet : undefined}
+                isInvalid={errors.squareFeet != undefined}
               />
             </div>
-          </div>
 
-          <Select
-            className="w-full"
-            label="When do you plan to sell?"
-            placeholder="Select Timeframe"
-            value={timeframe}
-            onChange={(e) => setTimeframe(e.target.value)}
-            required
-            isRequired
-          >
-            {timeframes.map((time) => (
-              <SelectItem key={time.key}>{time.label}</SelectItem>
-            ))}
-          </Select>
+            <Select
+              name="timeframe"
+              label="When do you plan to sell?"
+              placeholder="Select Timeframe"
+              value={values.timeframe}
+              onChange={handleChange}
+              errorMessage={errors.timeframe ? errors.timeframe : undefined}
+              isInvalid={errors.timeframe != undefined}
+            >
+              {timeframes.map((time) => (
+                <SelectItem key={time.key}>{time.label}</SelectItem>
+              ))}
+            </Select>
 
-          <Textarea
-            label="Additional Information"
-            placeholder="Tell us more about your property and selling goals..."
-            className="w-full"
-            value={additionalInfo}
-            onChange={(e) => setAdditionalInfo(e.target.value)}
-          />
+            <Textarea
+              name="additionalInfo"
+              label="Additional Information"
+              placeholder="Tell us more about your property and selling goals..."
+              value={values.additionalInfo}
+              onChange={handleChange}
+              errorMessage={errors.additionalInfo ? errors.additionalInfo : undefined}
+              isInvalid={errors.additionalInfo != undefined}
+            />
 
-          <Button
-            title='Submit Request'
-            color='warning'
-            variant='solid'
-            className="w-full"
-            onPress={handleSubmit}
-          >
-            Submit Request
-          </Button>
-        </>
-      ) : (
-        <div className="w-full p-8 border-0 shadow-sm rounded-lg mt-8 text-center">
-          <h3 className="text-2xl font-bold mb-6 tracking-tight">Thank You!</h3>
-          <p className="text-lg mb-4">Your home selling consultation request has been submitted.</p>
-          <p>A real estate professional will contact you shortly to discuss your property and selling strategy.</p>
-          <Button
-            title='Submit Another Request'
-            color='warning'
-            variant='light'
-            className="mt-8"
-            onPress={() => {
-              setFullName('')
-              setEmail('')
-              setPhone('')
-              setPropertyAddress('')
-              setBedrooms('')
-              setBathrooms('')
-              setSquareFeet('')
-              setTimeframe('')
-              setAdditionalInfo('')
-              setIsSubmitted(false)
-            }}
-          >
-            Submit Another Request
-          </Button>
-        </div>
-      )}
+            <Button
+              type="submit"
+              color="warning"
+              variant="solid"
+              isDisabled={!isValid}
+              isLoading={isSubmitting}
+            >
+              Submit Request
+            </Button>
+          </FormikForm>
+        )}
+      </Formik>
     </div>
-  )
-}
+  );
+};
 
-export default HomeSeller
+export default HomeSeller;

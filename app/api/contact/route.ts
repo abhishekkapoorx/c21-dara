@@ -3,8 +3,8 @@ import { z } from 'zod';
 
 import prisma from '@/prisma';
 import { resend } from '@/utils/lib/ResendMail/resend';
-import ContactMailClient from '@/emails/ContactMailClient';
-import ContactMailAdmin from '@/emails/ContactMailAdmin';
+import ContactMailClient from '@/components/emails/ContactMailClient';
+import ContactMailAdmin from '@/components/emails/ContactMailAdmin';
 
 
 const contactSchema = z.object({

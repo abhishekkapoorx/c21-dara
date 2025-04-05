@@ -1,13 +1,17 @@
-import React, { useState } from 'react'
-import { Heading } from '../TextComps'
-import { Button, Input, Select, SelectItem, Textarea } from '@heroui/react'
+import React from 'react';
+import { Heading } from '../TextComps';
+import { Button, Input, Select, SelectItem, Textarea, addToast } from '@heroui/react';
+import { Formik, Form as FormikForm } from 'formik';
+import * as Yup from 'yup';
+import { db } from '@/firebase';
+import { addDoc, collection } from 'firebase/firestore';
 
 export const budgetRanges = [
   { key: 'Under 500000', label: 'Under $500,000' },
   { key: '500-1000000', label: '$500,000 - $1,000,000' },
   { key: '1000000-2000000', label: '$1,000,000 - $2,000,000' },
   { key: '2000000+', label: '2,000,000+' },
-]
+];
 
 export const propertyTypes = [
   { key: 'condo', label: 'Condo' },
@@ -16,167 +20,191 @@ export const propertyTypes = [
   { key: 'semi-detached', label: 'Semi-detached' },
   { key: 'detached', label: 'Detached' },
   { key: 'bungalow', label: 'Bungalow' },
-]
+];
 
 export const timeframes = [
   { key: 'immediate', label: 'Immediately' },
   { key: '1-3months', label: '1-3 months' },
   { key: '3-6months', label: '3-6 months' },
   { key: '6month+', label: '6 months+' },
-]
+];
+
+interface HomeBuyerFormValues {
+    fullName: string;
+    email: string;
+    phone: string;
+    budgetRange: string;
+    propertyType: string;
+    timeframe: string;
+    additionalInfo: string;
+}
+
+export interface FormikSubmitProps {
+    resetForm: () => void;
+    setSubmitting: (isSubmitting: boolean) => void;
+}
 
 const HomeBuyers = () => {
-    const [fullName, setFullName] = useState('')
-    const [email, setEmail] = useState('')
-    const [phone, setPhone] = useState('')
-    const [budgetRange, setBudgetRange] = useState('')
-    const [propertyType, setPropertyType] = useState('')
-    const [timeframe, setTimeframe] = useState('')
-    const [additionalInfo, setAdditionalInfo] = useState('')
-    const [isSubmitted, setIsSubmitted] = useState(false)
+    const initialValues = {
+        fullName: '',
+        email: '',
+        phone: '',
+        budgetRange: '',
+        propertyType: '',
+        timeframe: '',
+        additionalInfo: ''
+    };
 
-    const handleSubmit = () => {
-        // Here you would typically send the form data to your backend
-        console.log({
-            fullName,
-            email,
-            phone,
-            budgetRange,
-            propertyType,
-            timeframe,
-            additionalInfo
-        })
-        
-        // Show success message
-        setIsSubmitted(true)
-    }
+    const validationSchema = Yup.object().shape({
+        fullName: Yup.string().required('Full name is required').min(2, 'Full name must be at least 2 characters').max(50, 'Full name must be at most 50 characters'),
+        email: Yup.string().email('Invalid email').required('Email is required'),
+        phone: Yup.string().required('Phone number is required').min(10, 'Phone number must be at least 10 digits').max(11, 'Phone number must be at most 11 digits'),
+        budgetRange: Yup.string().required('Budget range is required'),
+        propertyType: Yup.string().required('Property type is required'),
+        timeframe: Yup.string().required('Timeframe is required'),
+        additionalInfo: Yup.string()
+    });
+
+    const handleSubmit = async (
+        values: HomeBuyerFormValues, 
+        { resetForm, setSubmitting }: FormikSubmitProps
+    ): Promise<void> => {
+        setSubmitting(true);
+        try {
+            await addDoc(collection(db, 'homeBuyers'), {
+                ...values,
+                createdAt: new Date()
+            });
+            
+            resetForm();
+            
+            // Show success toast
+            addToast({
+                title: "Success",
+                description: "Your home buyer consultation request has been submitted.",
+                color: "success",
+            });
+        } catch (error: unknown) {
+            console.error('Error submitting form:', error);
+            
+            // Show error toast
+            addToast({
+                title: "Error",
+                description: "Failed to submit your request. Please try again later.",
+                color: "danger",
+            });
+        }
+        setSubmitting(false);
+    };
 
     return (
         <div className="flex flex-col items-center justify-center gap-8 max-w-2xl w-full">
-            {/* <Heading title='Home Buyers Consultations'/> */}
-            
-            {!isSubmitted ? (
-                <>
-                    <Input
-                        type="text"
-                        placeholder="Your Full Name"
-                        label="Full Name"
-                        className="w-full"
-                        value={fullName}
-                        onChange={(e) => setFullName(e.target.value)}
-                        required
-                        isRequired
-                    />
-                    
-                    <Input
-                        type="email"
-                        placeholder="your.email@example.com"
-                        label="Email Address"
-                        className="w-full"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                        isRequired
-                    />
-                    
-                    <Input
-                        type="tel"
-                        placeholder="(555) 123-4567"
-                        label="Phone Number"
-                        className="w-full"
-                        value={phone}
-                        onChange={(e) => setPhone(e.target.value)}
-                        required
-                        isRequired
-                    />
-                    
-                    <Select
-                        className="w-full"
-                        label="Budget Range"
-                        placeholder="Select Your Budget Range"
-                        value={budgetRange}
-                        onChange={(e) => setBudgetRange(e.target.value)}
-                        required
-                        isRequired
-                    >
-                        {budgetRanges.map((range) => (
-                            <SelectItem key={range.key}>{range.label}</SelectItem>
-                        ))}
-                    </Select>
-                    
-                    <Select
-                        className="w-full"
-                        label="Property Type"
-                        placeholder="Select Property Type"
-                        value={propertyType}
-                        onChange={(e) => setPropertyType(e.target.value)}
-                        required
-                        isRequired
-                    >
-                        {propertyTypes.map((type) => (
-                            <SelectItem key={type.key}>{type.label}</SelectItem>
-                        ))}
-                    </Select>
-                    
-                    <Select
-                        className="w-full"
-                        label="When do you plan to buy?"
-                        placeholder="Select Timeframe"
-                        value={timeframe}
-                        onChange={(e) => setTimeframe(e.target.value)}
-                        required
-                        isRequired
-                    >
-                        {timeframes.map((time) => (
-                            <SelectItem key={time.key}>{time.label}</SelectItem>
-                        ))}
-                    </Select>
-                    
-                    <Textarea
-                        label="Additional Information"
-                        placeholder="Tell us more about what you're looking for..."
-                        className="w-full"
-                        value={additionalInfo}
-                        onChange={(e) => setAdditionalInfo(e.target.value)}
-                    />
-                    
-                    <Button 
-                        title='Submit Request' 
-                        color='warning' 
-                        variant='solid' 
-                        className="w-full" 
-                        onPress={handleSubmit}
-                    >
-                        Submit Request
-                    </Button>
-                </>
-            ) : (
-                <div className="w-full p-8 border-0 shadow-sm rounded-lg mt-8 text-center">
-                    <h3 className="text-2xl font-bold mb-6 tracking-tight">Thank You!</h3>
-                    <p className="text-lg mb-4">Your home buyer consultation request has been submitted.</p>
-                    <p>A real estate professional will contact you shortly to discuss your home buying needs.</p>
-                    <Button
-                        title='Submit Another Request'
-                        color='warning'
-                        variant='light'
-                        className="mt-8"
-                        onPress={() => {
-                            setFullName('')
-                            setEmail('')
-                            setPhone('')
-                            setBudgetRange('')
-                            setPropertyType('')
-                            setTimeframe('')
-                            setAdditionalInfo('')
-                            setIsSubmitted(false)
-                        }}
-                    >
-                        Submit Another Request
-                    </Button>
-                </div>
-            )}
-        </div>
-    )
-}
+            <Formik
+                initialValues={initialValues}
+                validationSchema={validationSchema}
+                onSubmit={handleSubmit}
+            >
+                {({ values, errors, touched, handleChange, isSubmitting, isValid }) => (
+                    <FormikForm className="flex flex-col items-center justify-center gap-8 max-w-2xl w-full">
+                        <Input
+                            type="text"
+                            placeholder="Your Full Name"
+                            name="fullName"
+                            label="Full Name"
+                            value={values.fullName}
+                            onChange={handleChange}
+                            errorMessage={errors.fullName ? errors.fullName : undefined}
+                            isInvalid={errors.fullName != undefined}
+                        />
 
-export default HomeBuyers
+                        <Input
+                            type="email"
+                            placeholder="your.email@example.com"
+                            name="email"
+                            label="Email Address"
+                            value={values.email}
+                            onChange={handleChange}
+                            errorMessage={errors.email ? errors.email : undefined}
+                            isInvalid={errors.email != undefined}
+                        />
+
+                        <Input
+                            type="tel"
+                            placeholder="(555) 123-4567"
+                            name="phone"
+                            label="Phone Number"
+                            value={values.phone}
+                            onChange={handleChange}
+                            errorMessage={errors.phone  ? errors.phone : undefined}
+                            isInvalid={errors.phone != undefined}
+                        />
+
+                        <Select
+                            name="budgetRange"
+                            label="Budget Range"
+                            placeholder="Select Your Budget Range"
+                            value={values.budgetRange}
+                            onChange={handleChange}
+                            errorMessage={errors.budgetRange ? errors.budgetRange : undefined}
+                            isInvalid={errors.budgetRange != undefined}
+                        >
+                            {budgetRanges.map((range) => (
+                                <SelectItem key={range.key}>{range.label}</SelectItem>
+                            ))}
+                        </Select>
+
+                        <Select
+                            name="propertyType"
+                            label="Property Type"
+                            placeholder="Select Property Type"
+                            value={values.propertyType}
+                            onChange={handleChange}
+                            errorMessage={errors.propertyType ? errors.propertyType : undefined}
+                            isInvalid={errors.propertyType != undefined}
+                        >
+                            {propertyTypes.map((type) => (
+                                <SelectItem key={type.key}>{type.label}</SelectItem>
+                            ))}
+                        </Select>
+
+                        <Select
+                            name="timeframe"
+                            label="When do you plan to buy?"
+                            placeholder="Select Timeframe"
+                            value={values.timeframe}
+                            onChange={handleChange}
+                            errorMessage={errors.timeframe ? errors.timeframe : undefined}
+                            isInvalid={errors.timeframe != undefined}
+                        >
+                            {timeframes.map((time) => (
+                                <SelectItem key={time.key}>{time.label}</SelectItem>
+                            ))}
+                        </Select>
+
+                        <Textarea
+                            name="additionalInfo"
+                            label="Additional Information"
+                            placeholder="Tell us more about what you're looking for..."
+                            value={values.additionalInfo}
+                            onChange={handleChange}
+                            errorMessage={errors.additionalInfo ? errors.additionalInfo : undefined}
+                            isInvalid={errors.additionalInfo != undefined}
+                        />
+
+                        <Button
+                            color="warning"
+                            variant="solid"
+                            type="submit"
+                            isDisabled={!isValid}
+                            isLoading={isSubmitting}
+                        >
+                            Submit Request
+                        </Button>
+                    </FormikForm>
+                )}
+            </Formik>
+        </div>
+    );
+};
+
+export default HomeBuyers;
