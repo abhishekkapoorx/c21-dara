@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 import { timeframes } from './HomeBuyers';
 import { db } from '@/firebase';
 import { addDoc, collection } from 'firebase/firestore';
+import { sendRealEstateFormEmail } from '@/actions/SendRealEstateFormEmail';
 
 interface HomeSellerFormValues {
   fullName: string;
@@ -53,8 +54,24 @@ const HomeSeller = () => {
   ) => {
     setSubmitting(true);
     try {
-      await addDoc(collection(db, 'homeSellers'), {
+      // Add data to Firestore
+      const docRef = await addDoc(collection(db, 'homeSellers'), {
         ...values,
+        createdAt: new Date()
+      });
+      
+      // Send email with form data
+      await sendRealEstateFormEmail({
+        formType: 'homeSeller',
+        fullName: values.fullName,
+        email: values.email,
+        phone: values.phone,
+        propertyAddress: values.propertyAddress,
+        bedrooms: values.bedrooms,
+        bathrooms: values.bathrooms,
+        squareFeet: values.squareFeet,
+        timeframe: timeframes.find(time => time.key === values.timeframe)?.label || values.timeframe,
+        additionalInfo: values.additionalInfo,
         createdAt: new Date()
       });
       

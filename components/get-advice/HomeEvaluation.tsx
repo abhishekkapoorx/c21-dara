@@ -6,6 +6,7 @@ import { Formik, Form as FormikForm, FormikFormProps, FormikProps } from 'formik
 import * as Yup from 'yup';
 import { db } from '@/firebase';
 import { addDoc, collection } from 'firebase/firestore';
+import { sendRealEstateFormEmail } from '@/actions/SendRealEstateFormEmail';
 
 interface HomeEvaluationFormValues {
   fullName: string;
@@ -53,8 +54,25 @@ const HomeEvaluation = () => {
   ) => {
     setSubmitting(true);
     try {
+      // Add document to Firestore
       await addDoc(collection(db, 'homeEvaluations'), {
         ...values,
+        createdAt: new Date()
+      });
+      
+      // Send email with form data
+      await sendRealEstateFormEmail({
+        formType: 'homeEvaluation',
+        fullName: values.fullName,
+        email: values.email,
+        phone: values.phone,
+        propertyAddress: values.propertyAddress,
+        propertyType: propertyTypes.find(type => type.key === values.propertyType)?.label || values.propertyType,
+        bedrooms: values.bedrooms,
+        bathrooms: values.bathrooms,
+        squareFeet: values.squareFeet,
+        yearBuilt: values.yearBuilt,
+        additionalInfo: values.additionalInfo,
         createdAt: new Date()
       });
       

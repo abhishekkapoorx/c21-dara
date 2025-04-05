@@ -5,6 +5,7 @@ import { Formik, Form as FormikForm } from 'formik';
 import * as Yup from 'yup';
 import { db } from '@/firebase';
 import { addDoc, collection } from 'firebase/firestore';
+import { sendRealEstateFormEmail } from '@/actions/SendRealEstateFormEmail';
 
 export const budgetRanges = [
   { key: 'Under 500000', label: 'Under $500,000' },
@@ -71,8 +72,22 @@ const HomeBuyers = () => {
     ): Promise<void> => {
         setSubmitting(true);
         try {
-            await addDoc(collection(db, 'homeBuyers'), {
+            // Add data to Firestore
+            const docRef = await addDoc(collection(db, 'homeBuyers'), {
                 ...values,
+                createdAt: new Date()
+            });
+            
+            // Send email with form data
+            await sendRealEstateFormEmail({
+                formType: 'homeBuyer',
+                fullName: values.fullName,
+                email: values.email,
+                phone: values.phone,
+                budgetRange: budgetRanges.find(range => range.key === values.budgetRange)?.label || values.budgetRange,
+                propertyType: propertyTypes.find(type => type.key === values.propertyType)?.label || values.propertyType,
+                timeframe: timeframes.find(time => time.key === values.timeframe)?.label || values.timeframe,
+                additionalInfo: values.additionalInfo,
                 createdAt: new Date()
             });
             
