@@ -39,7 +39,7 @@ export const siteConfig = {
       ]
     },
     {
-      label: "NewsLetter",
+      label: "Newsletter",
       href: "/newsletter",
       dropdownItems: null,
     },
@@ -62,7 +62,7 @@ export const siteConfig = {
       href: "/calculators",
     },
     {
-      label: "NewsLetter",
+      label: "Newsletter",
       href: "/newsletter",
     },
   ],

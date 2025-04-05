@@ -1,4 +1,4 @@
-import { Body, Column, Container, Head, Hr, Html, Img, Link, Preview, Row, Section, Tailwind, Text } from "@react-email/components";
+import { Hr, Link, Section, Text } from "@react-email/components";
 import BaseEmailTemplate from "./BaseEmailTemplate";
 
 

@@ -24,25 +24,20 @@ export function BaseEmailTemplate(props: BaseTempProps) {
                                     <Column className="w-[80%]">
                                         <Img
                                             alt="Dara Dream Realty Logo"
-                                            height="24"
-                                            src={`https://illumework.com/500w/Dara Dream Realty_gray_full_white.png`}
+                                            height="150"
+                                            src={`https://c21-dara.vercel.app/images/logo.png`}
                                         />
                                     </Column>
                                     <Column align="right">
                                         <Row align="right">
                                             <Column className="px-[8px]">
-                                                <Link className="text-gray-400 [text-decoration:none]" href="https://illumework.com/services">
-                                                    Services
+                                                <Link className="text-gray-400 [text-decoration:none]" href="https://c21-dara.vercel.app/get-advice">
+                                                    Get Advice
                                                 </Link>
                                             </Column>
                                             <Column className="px-[8px]">
-                                                <Link className="text-gray-400 [text-decoration:none]" href="https://illumework.com/projects">
-                                                    Projects
-                                                </Link>
-                                            </Column>
-                                            <Column className="px-[8px]">
-                                                <Link className="text-gray-400 [text-decoration:none]" href="https://illumework.com/about">
-                                                    About
+                                                <Link className="text-gray-400 [text-decoration:none]" href="https://c21-dara.vercel.app/newsletter">
+                                                    Newsletter
                                                 </Link>
                                             </Column>
                                         </Row>
