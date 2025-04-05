@@ -8,7 +8,7 @@ const HeroTextComp = () => {
       <div className="grid grid-cols-4 gap-4 lg:gap-8 w-full">
 
         <div className="col-span-4 lg:col-span-1">
-          <h2 className="text-2xl md:text-4xl font-regular text-center lg:text-start text-yellow-500 sticky top-32">About Us</h2>
+          <h2 className="text-2xl md:text-4xl font-regular text-center lg:text-start text-amber-500 sticky top-32">About Us</h2>
         </div>
         <div className="col-span-4 lg:col-span-2 flex flex-col lg:items-start items-center justify-start gap-4 md:gap-8">
           <h1 className="text-3xl md:text-6xl col-span-2 md:col-span-1 font-light text-zinc-800 dark:text-white md:text-start text-center">

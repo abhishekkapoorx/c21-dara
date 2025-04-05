@@ -183,32 +183,32 @@ const PurchaseCalComp = () => {
                     <div className="grid grid-cols-1 gap-y-6 md:grid-cols-2 md:gap-x-12">
                         {/* {Object.keys(outputs).map((key) => (
                             <div key={key} className="flex flex-col">
-                                <span className="text-xs uppercase tracking-wider text-yellow-500 mb-1">{key.replace(/([A-Z])/g, ' $1')}</span>
+                                <span className="text-xs uppercase tracking-wider text-amber-500 mb-1">{key.replace(/([A-Z])/g, ' $1')}</span>
                                 <span className="text-2xl font-medium">${outputs[key as keyof CalculationOutputs]}</span>
                             </div>
                         ))} */}
                         <div className="flex flex-col">
-                            <span className="text-xs uppercase tracking-wider text-yellow-500 mb-1">Principal</span>
+                            <span className="text-xs uppercase tracking-wider text-amber-500 mb-1">Principal</span>
                             <span className="text-2xl font-medium">${outputs.principal}</span>
                         </div>
                         <div className="flex flex-col">
-                            <span className="text-xs uppercase tracking-wider text-yellow-500 mb-1">Term In Months</span>
+                            <span className="text-xs uppercase tracking-wider text-amber-500 mb-1">Term In Months</span>
                             <span className="text-2xl font-medium">{outputs.termInMonths} months</span>
                         </div>
                         <div className="flex flex-col">
-                            <span className="text-xs uppercase tracking-wider text-yellow-500 mb-1">Monthly Interest Rate</span>
+                            <span className="text-xs uppercase tracking-wider text-amber-500 mb-1">Monthly Interest Rate</span>
                             <span className="text-2xl font-medium">{outputs.monthlyInterestRate}%</span>
                         </div>
                         <div className="flex flex-col">
-                            <span className="text-xs uppercase tracking-wider text-yellow-500 mb-1">Monthly Payment</span>
+                            <span className="text-xs uppercase tracking-wider text-amber-500 mb-1">Monthly Payment</span>
                             <span className="text-2xl font-medium">${outputs.monthlyPayment}</span>
                         </div>
                         <div className="flex flex-col">
-                            <span className="text-xs uppercase tracking-wider text-yellow-500 mb-1">Total Payment</span>
+                            <span className="text-xs uppercase tracking-wider text-amber-500 mb-1">Total Payment</span>
                             <span className="text-2xl font-medium">${outputs.totalPayment}</span>
                         </div>
                         <div className="flex flex-col">
-                            <span className="text-xs uppercase tracking-wider text-yellow-500 mb-1">Total Interest</span>
+                            <span className="text-xs uppercase tracking-wider text-amber-500 mb-1">Total Interest</span>
                             <span className="text-2xl font-medium">${outputs.totalInterest}</span>
                         </div>
                         

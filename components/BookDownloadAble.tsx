@@ -31,7 +31,7 @@ function BookDownloadAble({ book, index }: BookDownloadAbleProps) {
                         <span className="mx-2">•</span>
                         <span className="text-gray-500">{book.size}</span>
                     </div>
-                    <Button color="warning" onPress={onOpen} className='flex items-center justify-center bg-yellow-500 text-black px-4 py-2 rounded-md hover:bg-yellow-600 transition-colors'>
+                    <Button color="warning" onPress={onOpen} className='flex items-center justify-center bg-amber-500 text-black px-4 py-2 rounded-md hover:bg-amber-500 transition-colors'>
                         Download
                     </Button>
                 </div>

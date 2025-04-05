@@ -8,6 +8,7 @@ import * as Yup from 'yup'
 import SendNewsletterEmail from '@/actions/SendNewsletterEmail'
 import { db } from "@/firebase"
 import { addDoc, collection, getDocs, query, where } from "firebase/firestore"
+import { IconBulbFilled, IconGraph, IconHome, IconTrendingUp, IconTrendingUp2, IconTrendingUp3 } from '@tabler/icons-react'
 
 interface NewsletterFormData {
     fullName: string;
@@ -92,114 +93,144 @@ const NeweletterPage = () => {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center gap-8 max-w-2xl w-full">
+        <div className="flex flex-col items-center justify-center gap-8 w-full mb-12 px-4 max-w-screen-2xl">
             <Heading title='Subscribe Newsletter' />
 
             <div className="flex md:flex-row flex-col items-center justify-center gap-4 max-w-2xl w-full">
-                <h2 className="text-lg font-light md:text-xl text-warning text-center md:text-left">Stay Updated with Real Estate Insights</h2>
+                <h2 className="text-lg font-light md:text-xl text-amber-500 text-center md:text-left">Stay Updated with Real Estate Insights</h2>
                 <p className="text-base md:text-md text-center md:text-left">Subscribe to our newsletter for the latest market trends, tips, and exclusive property listings.</p>
             </div>
 
-            <Formik
-                initialValues={initialValues}
-                validationSchema={NewsletterSchema}
-                onSubmit={handleSubmit}
-            >
-                {({ isSubmitting, errors, touched, isValid, values, setValues, handleChange }) => (
-                    <FormikForm className="flex flex-col items-center justify-center gap-8 max-w-2xl w-full">
-                        <div className="w-full">
-                            <Input
-                                type="text"
-                                placeholder="Full Name"
-                                name="fullName"
-                                label="Full Name"
-                                value={values.fullName}
-                                onChange={handleChange}
-                                errorMessage={errors.fullName ? errors.fullName : undefined}
-                                isInvalid={errors.fullName != undefined}
-                            />
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 w-full place-content-center my-8">
+                <div className="flex flex-col items-center justify-center gap-16">
+                    <div className="flex flex-col items-center text-center">
+                        <div className="text-amber-500 text-4xl mb-2 w-16 h-16">
+                            <IconTrendingUp className='w-full h-full'></IconTrendingUp>
                         </div>
+                        <h3 className="text-amber-500 text-lg md:text-2xl">Market Updates</h3>
+                        <p className="text-base text-gray-300">Get the latest real estate market trends and insights.</p>
+                    </div>
 
-                        <div className="w-full">
-                            <Input
-                                type="email"
-                                placeholder="Email Address"
-                                name="email"
-                                label="Email Address"
-                                value={values.email}
-                                onChange={handleChange}
-                                errorMessage={errors.email ? errors.email : undefined}
-                                isInvalid={errors.email != undefined}
-                            />
+                    <div className="flex flex-col items-center text-center">
+                        <div className="text-amber-500 text-4xl mb-2 w-16 h-16">
+                            <IconHome className='w-full h-full'></IconHome>
                         </div>
+                        <h3 className="text-amber-500 text-lg md:text-2xl">Exclusive Listings</h3>
+                        <p className="text-base text-gray-300">Be the first to know about new property listings.</p>
+                    </div>
 
-                        <div className="w-full">
-                            <Input
-                                type="tel"
-                                placeholder="Phone Number"
-                                name="phone"
-                                label="Phone Number"
-                                value={values.phone}
-                                onChange={handleChange}
-                                errorMessage={errors.phone ? errors.phone : undefined}
-                                isInvalid={errors.phone != undefined}
-                            />
+                    <div className="flex flex-col items-center text-center">
+                        <div className="text-amber-500 text-4xl mb-2 w-16 h-16">
+                            <IconBulbFilled className='w-full h-full'></IconBulbFilled>
                         </div>
+                        <h3 className="text-amber-500 text-lg md:text-2xl">Tips & Advice</h3>
+                        <p className="text-base text-gray-300">Receive valuable tips for buying and selling properties.</p>
+                    </div>
+                </div>
 
-                        <div className='w-full grid grid-cols-1 md:grid-cols-3 gap-4'>
-                            <Checkbox
-                                type="checkbox"
-                                className="w-full"
-                                name="marketUpdates"
-                                color="warning"
-                                isSelected={values.marketUpdates}
-                                onChange={handleChange}
-                                isInvalid={errors.marketUpdates != undefined}
-                            >Market Updates</Checkbox>
-                            <Checkbox
-                                type="checkbox"
-                                className="w-full"
-                                name="propertyListings"
-                                color="warning"
-                                isSelected={values.propertyListings}
-                                onChange={handleChange}
-                                isInvalid={errors.propertyListings != undefined}
-                            >Property Listings</Checkbox>
-                            <Checkbox
-                                type="checkbox"
-                                className="w-full"
-                                name="tipsAdvice"
-                                color="warning"
-                                isSelected={values.tipsAdvice}
-                                onChange={handleChange}
-                                isInvalid={errors.tipsAdvice != undefined}
-                            >Tips & Advice</Checkbox>
-                        </div>
+                <Formik
+                    initialValues={initialValues}
+                    validationSchema={NewsletterSchema}
+                    onSubmit={handleSubmit}
+                >
+                    {({ isSubmitting, errors, touched, isValid, values, setValues, handleChange }) => (
+                        <FormikForm className="flex flex-col items-center justify-center gap-8 max-w-2xl w-full">
+                            <div className="w-full">
+                                <Input
+                                    type="text"
+                                    placeholder="Full Name"
+                                    name="fullName"
+                                    label="Full Name"
+                                    value={values.fullName}
+                                    onChange={handleChange}
+                                    errorMessage={errors.fullName ? errors.fullName : undefined}
+                                    isInvalid={errors.fullName != undefined}
+                                />
+                            </div>
 
-                        <div className="w-full">
-                            <Checkbox
-                                type="checkbox"
-                                className="w-full"
-                                name="privacyPolicy"
-                                color="warning"
-                                isSelected={values.privacyPolicy}
-                                onChange={handleChange}
-                                isInvalid={errors.privacyPolicy != undefined}
-                            >
-                                I agree to receive emails and accept the&nbsp;
-                                <Link href={"/"} className='text-yellow-600'>Privacy Policy</Link>
-                            </Checkbox>
-                            {errors.privacyPolicy &&
-                                <div className="text-danger text-sm mt-1">{errors.privacyPolicy}</div>
-                            }
-                        </div>
+                            <div className="w-full">
+                                <Input
+                                    type="email"
+                                    placeholder="Email Address"
+                                    name="email"
+                                    label="Email Address"
+                                    value={values.email}
+                                    onChange={handleChange}
+                                    errorMessage={errors.email ? errors.email : undefined}
+                                    isInvalid={errors.email != undefined}
+                                />
+                            </div>
 
-                        <Button color='warning' variant='solid' type='submit' isDisabled={!isValid} isLoading={isSubmitting}>
-                            Subscribe
-                        </Button>
-                    </FormikForm>
-                )}
-            </Formik>
+                            <div className="w-full">
+                                <Input
+                                    type="tel"
+                                    placeholder="Phone Number"
+                                    name="phone"
+                                    label="Phone Number"
+                                    value={values.phone}
+                                    onChange={handleChange}
+                                    errorMessage={errors.phone ? errors.phone : undefined}
+                                    isInvalid={errors.phone != undefined}
+                                />
+                            </div>
+
+                            <div className='w-full grid grid-cols-1 md:grid-cols-3 gap-4'>
+                                <Checkbox
+                                    type="checkbox"
+                                    className="w-full"
+                                    name="marketUpdates"
+                                    color="warning"
+                                    isSelected={values.marketUpdates}
+                                    onChange={handleChange}
+                                    isInvalid={errors.marketUpdates != undefined}
+                                >Market Updates</Checkbox>
+                                <Checkbox
+                                    type="checkbox"
+                                    className="w-full"
+                                    name="propertyListings"
+                                    color="warning"
+                                    isSelected={values.propertyListings}
+                                    onChange={handleChange}
+                                    isInvalid={errors.propertyListings != undefined}
+                                >Property Listings</Checkbox>
+                                <Checkbox
+                                    type="checkbox"
+                                    className="w-full"
+                                    name="tipsAdvice"
+                                    color="warning"
+                                    isSelected={values.tipsAdvice}
+                                    onChange={handleChange}
+                                    isInvalid={errors.tipsAdvice != undefined}
+                                >Tips & Advice</Checkbox>
+                            </div>
+
+                            <div className="w-full">
+                                <Checkbox
+                                    type="checkbox"
+                                    className="w-full"
+                                    name="privacyPolicy"
+                                    color="warning"
+                                    isSelected={values.privacyPolicy}
+                                    onChange={handleChange}
+                                    isInvalid={errors.privacyPolicy != undefined}
+                                >
+                                    I agree to receive emails and accept the&nbsp;
+                                    <Link href={"/"} className='text-amber-500'>Privacy Policy</Link>
+                                </Checkbox>
+                                {errors.privacyPolicy &&
+                                    <div className="text-danger text-sm mt-1">{errors.privacyPolicy}</div>
+                                }
+                            </div>
+
+                            <Button fullWidth color='warning' variant='solid' type='submit' isDisabled={!isValid} isLoading={isSubmitting}>
+                                Subscribe
+                            </Button>
+                        </FormikForm>
+                    )}
+                </Formik>
+            </div>
+
+
         </div>
     )
 }

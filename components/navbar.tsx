@@ -82,7 +82,7 @@ export const Navbar = ({ session }: { session: Session | null }) => {
                 <NextLink
                   className={clsx(
                     linkStyles({ color: "foreground" }),
-                    "data-[active=true]:text-yellow-600 data-[active=true]:font-medium",
+                    "data-[active=true]:text-amber-500 data-[active=true]:font-medium",
                   )}
                   color="foreground"
                   data-active={pathname === item.href ? "true" : "false"}
@@ -103,7 +103,7 @@ export const Navbar = ({ session }: { session: Session | null }) => {
                       disableRipple
                       className={clsx(
                         linkStyles({ color: "foreground" }),
-                        "data-[active=true]:text-yellow-500 data-[active=true]:font-medium",
+                        "data-[active=true]:text-amber-500 data-[active=true]:font-medium",
                       )}
                       data-active={pathname === item.href ? "true" : "false"}
                       radius="sm"
@@ -130,7 +130,7 @@ export const Navbar = ({ session }: { session: Session | null }) => {
                       {/* <NextLink
                         className={clsx(
                           linkStyles({ color: "foreground" }),
-                          "data-[active=true]:text-yellow-500 data-[active=true]:font-medium",
+                          "data-[active=true]:text-amber-500 data-[active=true]:font-medium",
                         )}
                         color="foreground"
                         data-active={pathname === item.href ? "true" : "false"}
@@ -149,7 +149,7 @@ export const Navbar = ({ session }: { session: Session | null }) => {
               <NextLink
                 className={clsx(
                   linkStyles({ color: "foreground" }),
-                  "data-[active=true]:text-yellow-600 data-[active=true]:font-medium",
+                  "data-[active=true]:text-amber-500 data-[active=true]:font-medium",
                 )}
                 color="foreground"
                 data-active={pathname === "/admin" ? "true" : "false"}

@@ -12,17 +12,17 @@ export default function ReviewCard() {
           src="https://avatars.githubusercontent.com/u/86160567?s=200&v=4"
           width={40}
         /> */}
-        <div className="h-10 w-10 rounded-2xl flex items-center justify-center bg-yellow-500 text-black">
+        <div className="h-10 w-10 rounded-2xl flex items-center justify-center bg-amber-500 text-black">
             L
         </div>
         <div className="flex flex-col gap-2">
           <p className="text-lg">Leena</p>
           <div className="text-small text-default-500 flex gap-1">
-            <IconStarFilled size={16} className="text-yellow-500"/>
-            <IconStarFilled size={16} className="text-yellow-500"/>
-            <IconStarFilled size={16} className="text-yellow-500"/>
-            <IconStarHalfFilled size={16} className="text-yellow-500"/>
-            <IconStar  size={16} className="text-yellow-500"/>
+            <IconStarFilled size={16} className="text-amber-500"/>
+            <IconStarFilled size={16} className="text-amber-500"/>
+            <IconStarFilled size={16} className="text-amber-500"/>
+            <IconStarHalfFilled size={16} className="text-amber-500"/>
+            <IconStar  size={16} className="text-amber-500"/>
           </div>
         </div>
       </CardHeader>
