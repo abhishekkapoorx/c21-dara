@@ -9,6 +9,8 @@ import {
     ModalHeader,
 } from "@heroui/react";
 import { useState } from "react";
+import { db } from "../firebase";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 
 interface BookDownloadModalProps {
     isOpen: boolean;
@@ -20,17 +22,41 @@ interface BookDownloadModalProps {
 const ModalComp = ({ isOpen, onOpen, onOpenChange, bookHref }: BookDownloadModalProps) => {
     const [Email, setEmail] = useState("")
     const [submitting, setSubmitting] = useState(false)
-    const handleDownload = () => {
-        setSubmitting(true)
-        window.open(bookHref, "_blank");
-        addToast({
-            title: "Download started",
-            description: "Your download will start shortly.",
-            color: "success"
-        })
-        setSubmitting(false)
-        onOpenChange(false)
+    
+    const handleDownload = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        try {
+            setSubmitting(true);
+            
+            // Add email to Firestore
+            await addDoc(collection(db, "ebookDownloads"), {
+                email: Email,
+                bookUrl: bookHref,
+                downloadedAt: serverTimestamp(),
+            });
+            
+            // Open the download
+            window.open(bookHref, "_blank");
+            
+            addToast({
+                title: "Download started",
+                description: "Your download will start shortly.",
+                color: "success"
+            });
+            
+            setSubmitting(false);
+            onOpenChange(false);
+        } catch (error) {
+            console.error("Error saving download data:", error);
+            addToast({
+                title: "Download error",
+                description: "There was an issue with your download.",
+                color: "danger"
+            });
+            setSubmitting(false);
+        }
     }
+
     return (
         <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
             <ModalContent>
