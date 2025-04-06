@@ -18,8 +18,8 @@ const ReviewComp = () => {
           return (
             <div className="col-span-4 lg:col-span-3 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-8 place-items-center">
             <>
-              {reviews.map((review) => (
-                <ReviewCard review={review} />
+              {reviews.map((review, idx) => (
+                <ReviewCard key={review.reviewId} review={review} />
               ))}
             </>
           </div>

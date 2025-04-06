@@ -42,13 +42,13 @@ export default function ReviewCard({review}: {review: GoogleReview}) {
           <p className="text-lg">{review.reviewer.displayName}</p>
           <div className="text-small text-default-500 flex gap-1">
             {Array.from({length: starFilled}).map((_, index) => (
-              <IconStarFilled key={index} size={16} className="text-amber-500"/>
+              <IconStarFilled key={index+"asfda4"} size={16} className="text-amber-500"/>
             ))}
             {Array.from({length: starHalf}).map((_, index) => (
-              <IconStarHalfFilled key={index} size={16} className="text-amber-500"/>
+              <IconStarHalfFilled key={index+"asdfea6gra"} size={16} className="text-amber-500"/>
             ))}
             {Array.from({length: starEmpty}).map((_, index) => (
-              <IconStar key={index} size={16} className="text-amber-500"/>
+              <IconStar key={index+"54af6d6afa"} size={16} className="text-amber-500"/>
             ))}
             {/* <IconStarFilled size={16} className="text-amber-500"/>
 
@@ -66,11 +66,11 @@ export default function ReviewCard({review}: {review: GoogleReview}) {
         <p>{review.comment}</p>
       </CardBody>
       <Divider />
-      <CardFooter>
+      {/* <CardFooter>
         <Link isExternal showAnchorIcon href="https://github.com/heroui-inc/heroui">
            
         </Link>
-      </CardFooter>
+      </CardFooter> */}
     </Card>
   );
 }
