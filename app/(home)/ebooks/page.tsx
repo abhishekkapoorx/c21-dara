@@ -5,7 +5,7 @@ import React from 'react'
 
 const EbookPage = () => {
     return (
-        <div className="flex flex-col items-center justify-center gap-8 max-w-2xl w-full">
+        <div className="flex flex-col items-center justify-center gap-8 max-w-2xl w-full p-4">
             <Heading title='Download Ebooks'/>
 
             <div className="w-full">
