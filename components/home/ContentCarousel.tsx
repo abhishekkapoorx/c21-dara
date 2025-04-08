@@ -55,7 +55,7 @@ const ContentCarousel = () => {
         </AnimatePresence>
 
         <motion.div className='absolute bottom-0 left-0 w-full'>
-          <div className="bg-white dark:bg-black/10 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-20  rounded-t-2xl flex flex-col items-center justify-center px-8 py-8 gap-4 shadow-lg">
+          <div className="bg-white dark:bg-black/10 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10  rounded-t-2xl flex flex-col items-center justify-center px-8 py-8 gap-4 shadow-lg">
             <div className='w-full flex items-center justify-center gap-4'>
               <h2 className='text-xl md:text-3xl my-4 dark:text-white text-zinc-800 font-semibold text-center'>Find Your Dream Home</h2>
             </div>
