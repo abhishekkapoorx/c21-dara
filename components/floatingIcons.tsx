@@ -8,7 +8,7 @@ const FloatingIcons = () => {
             <IconComp href="https://wa.me/14155238886" Icon={IconBrandWhatsappFilled} />
             <IconComp href="https://instagram.com" Icon={IconBrandInstagram} />
             <IconComp href="https://facebook.com" Icon={IconBrandFacebookFilled} />
-            <IconComp href="https://booking.com" Icon={IconBrandBooking} />
+            {/* <IconComp href="https://booking.com" Icon={IconBrandBooking} /> */}
         </div>
     )
 }

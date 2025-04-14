@@ -59,7 +59,7 @@ const HomeBuyers = () => {
     const validationSchema = Yup.object().shape({
         fullName: Yup.string().required('Full name is required').min(2, 'Full name must be at least 2 characters').max(50, 'Full name must be at most 50 characters'),
         email: Yup.string().email('Invalid email').required('Email is required'),
-        phone: Yup.string().required('Phone number is required').min(10, 'Phone number must be at least 10 digits').max(11, 'Phone number must be at most 11 digits'),
+        phone: Yup.string().required('Phone number is required').min(10, 'Phone number must be at least 10 digits').max(10, 'Phone number must be at most 10 digits'),
         budgetRange: Yup.string().required('Budget range is required'),
         propertyType: Yup.string().required('Property type is required'),
         timeframe: Yup.string().required('Timeframe is required'),

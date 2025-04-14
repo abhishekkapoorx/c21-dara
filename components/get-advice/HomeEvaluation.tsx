@@ -38,7 +38,7 @@ const HomeEvaluation = () => {
   const validationSchema = Yup.object().shape({
     fullName: Yup.string().required('Full name is required'),
     email: Yup.string().email('Invalid email').required('Email is required'),
-    phone: Yup.string().required('Phone number is required').min(10, 'Phone number must be at least 10 digits').max(11, 'Phone number must be at most 11 digits'),
+    phone: Yup.string().required('Phone number is required').min(10, 'Phone number must be at least 10 digits').max(10, 'Phone number must be at most 10 digits'),
     propertyAddress: Yup.string().required('Property address is required'),
     propertyType: Yup.string().required('Property type is required'),
     bedrooms: Yup.number().min(0, 'Bedrooms must be at least 0').required('Bedrooms are required'),

@@ -6,10 +6,14 @@ import { Button, Input } from '@heroui/react';
 
 const ContentCarousel = () => {
   const images = [
-    "/images/img (1).jpeg",
-    "/images/img (1).jpg",
-    "/images/img (2).jpeg",
-    "/images/img (3).jpg",
+    "/images/1.jpg",
+    "/images/2.jpg",
+    "/images/3.jpg",
+    "/images/4.jpg",
+    "/images/5.jpg",
+    "/images/6.jpg",
+    "/images/7.jpeg",
+    "/images/8.jpeg",
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -30,7 +34,7 @@ const ContentCarousel = () => {
 
 
   return (
-      <div className="relative w-full h-[80vh] overflow-hidden bg-bottom">
+      <div className="relative w-full h-[85vh] overflow-hidden bg-bottom">
         {/* Slideshow with crossfade effect */}
         <AnimatePresence>
           <motion.div
