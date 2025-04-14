@@ -52,11 +52,11 @@ const NeweletterPage = () => {
 
             const querySnapshot = await getDocs(q);
             if (!querySnapshot.empty) {
-                console.log("User already subscribed");
+                console.log("User Already Subscribed");
                 addToast({
-                    title: "Failed to Subscribe",
-                    description: "User already subscribed",
-                    color: "primary",
+                    title: "User Already Subscribed",
+                    description: "You are already subscribed to the newsletter",
+                    color: "warning",
                 });
                 setSubmitting(false);
                 return;

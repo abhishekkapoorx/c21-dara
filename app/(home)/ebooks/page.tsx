@@ -13,15 +13,22 @@ const EbookPage = () => {
                     {[
                         {
                             title: "Home Buying 101",
-                            description: "A step-by-step guide for first-time homebuyers",
+                            description: "A step-by-step guide for first-time home buyers.",
                             size: "3.2 MB",
                             url: "/ebooks/ebook-1.pdf",
                             format: "PDF"
                         },
                         {
-                            title: "Investment Property Strategies",
-                            description: "Maximizing returns on residential and commercial investments",
-                            size: "2.6 MB",
+                            title: "Home Selling 101",
+                            description: "A step-by-step guide for first-time home sellers.",
+                            size: "3.2 MB",
+                            url: "/ebooks/ebook-1.pdf",
+                            format: "PDF"
+                        },
+                        {
+                            title: "Home Owning 101",
+                            description: "A step-by-step guide for first-time home owners.",
+                            size: "3.2 MB",
                             url: "/ebooks/ebook-1.pdf",
                             format: "PDF"
                         },

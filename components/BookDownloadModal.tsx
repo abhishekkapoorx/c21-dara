@@ -21,6 +21,7 @@ interface BookDownloadModalProps {
 
 const ModalComp = ({ isOpen, onOpen, onOpenChange, bookHref }: BookDownloadModalProps) => {
     const [Email, setEmail] = useState("")
+    const [name, setName] = useState("")
     const [submitting, setSubmitting] = useState(false)
     
     const handleDownload = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -30,6 +31,7 @@ const ModalComp = ({ isOpen, onOpen, onOpenChange, bookHref }: BookDownloadModal
             
             // Add email to Firestore
             await addDoc(collection(db, "ebookDownloads"), {
+                name: name,
                 email: Email,
                 bookUrl: bookHref,
                 downloadedAt: serverTimestamp(),
@@ -64,6 +66,16 @@ const ModalComp = ({ isOpen, onOpen, onOpenChange, bookHref }: BookDownloadModal
                     <form onSubmit={handleDownload}>
                         <ModalHeader className="flex flex-col gap-1">Download Ebook</ModalHeader>
                         <ModalBody>
+                            <Input
+                                type="name"
+                                placeholder="Enter your name"
+                                label="Name"
+                                className="w-full mb-4"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                required
+                                isRequired
+                            />
                             <Input
                                 type="email"
                                 placeholder="Enter your email"

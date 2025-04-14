@@ -19,9 +19,11 @@ export function Providers({ children, themeProps }: ProvidersProps) {
     <HeroUIProvider navigate={router.push}>
       <NextThemesProvider {...themeProps}>
       <ToastProvider 
+      placement={'top-center'} toastOffset={"top-center".includes("top") ? 60 : 0}
         toastProps={{
           variant: "flat",
           timeout: 2500,
+          
         }}
       />
         {children}

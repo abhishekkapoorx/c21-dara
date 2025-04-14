@@ -22,14 +22,14 @@ function BookDownloadAble({ book, index }: BookDownloadAbleProps) {
     return (
         <div className="border border-black transition-colors">
             <ModalComp isOpen={isOpen} onOpen={onOpen} onOpenChange={onOpenChange} bookHref={book.url} />
-            <div className="p-6 flex flex-col h-full">
+            <div className="p-6 flex flex-col h-full hover:bg-zinc-900 rounded-2xl transition-all duration-500">
                 <h3 className="text-xl font-bold mb-2">{book.title}</h3>
-                <p className="text-gray-600 mb-4 flex-grow">{book.description}</p>
+                <p className="text-zinc-400 mb-4 flex-grow">{book.description}</p>
                 <div className="flex justify-between items-center mt-auto">
                     <div className="text-sm">
-                        <span className="text-gray-500">{book.format}</span>
+                        <span className="text-zinc-500">{book.format}</span>
                         <span className="mx-2">•</span>
-                        <span className="text-gray-500">{book.size}</span>
+                        <span className="text-zinc-500">{book.size}</span>
                     </div>
                     <Button color="warning" onPress={onOpen} className='flex items-center justify-center bg-amber-500 text-black px-4 py-2 rounded-md hover:bg-amber-500 transition-colors'>
                         Download
