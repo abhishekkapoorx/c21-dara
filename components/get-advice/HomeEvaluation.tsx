@@ -55,11 +55,23 @@ const HomeEvaluation = () => {
     setSubmitting(true);
     try {
       // Add document to Firestore
+      const response = await fetch(`https://open.kickbox.com/v1/disposable/${values.email}`);
+      const { disposable } = await response.json();
+      if (disposable) {
+        addToast({
+          title: "Invalid email",
+          description: "Please use a valid email address.",
+          color: "danger"
+        });
+        setSubmitting(false);
+        return;
+      }
+
       await addDoc(collection(db, 'homeEvaluations'), {
         ...values,
         createdAt: new Date()
       });
-      
+
       // Send email with form data
       await sendRealEstateFormEmail({
         formType: 'homeEvaluation',
@@ -75,9 +87,9 @@ const HomeEvaluation = () => {
         additionalInfo: values.additionalInfo,
         createdAt: new Date()
       });
-      
+
       resetForm();
-      
+
       // Show success toast
       addToast({
         title: "Success",
@@ -86,7 +98,7 @@ const HomeEvaluation = () => {
       });
     } catch (error) {
       console.error('Error submitting form:', error);
-      
+
       // Show error toast
       addToast({
         title: "Error",

@@ -46,6 +46,19 @@ const NeweletterPage = () => {
         setSubmitting(true);
 
         try {
+            const response = await fetch(`https://open.kickbox.com/v1/disposable/${values.email}`);
+            const { disposable } = await response.json();
+            if (disposable) {
+                console.log("Disposable Email Address");
+                addToast({
+                    title: "Disposable Email Address",
+                    description: "Please use a valid email address",
+                    color: "warning",
+                });
+                setSubmitting(false);
+                return;
+            }
+
             // check if user is already subscribed
             const usersRef = collection(db, "newsletter");
             const q = query(usersRef, where("email", "==", values.email));

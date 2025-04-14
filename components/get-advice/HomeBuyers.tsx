@@ -8,26 +8,26 @@ import { addDoc, collection } from 'firebase/firestore';
 import { sendRealEstateFormEmail } from '@/actions/SendRealEstateFormEmail';
 
 export const budgetRanges = [
-  { key: 'Under 500000', label: 'Under $500,000' },
-  { key: '500-1000000', label: '$500,000 - $1,000,000' },
-  { key: '1000000-2000000', label: '$1,000,000 - $2,000,000' },
-  { key: '2000000+', label: '2,000,000+' },
+    { key: 'Under 500000', label: 'Under $500,000' },
+    { key: '500-1000000', label: '$500,000 - $1,000,000' },
+    { key: '1000000-2000000', label: '$1,000,000 - $2,000,000' },
+    { key: '2000000+', label: '2,000,000+' },
 ];
 
 export const propertyTypes = [
-  { key: 'condo', label: 'Condo' },
-  { key: 'condo-townhouse', label: 'Condo Townhouse' },
-  { key: 'townhouse', label: 'Townhouse' },
-  { key: 'semi-detached', label: 'Semi-detached' },
-  { key: 'detached', label: 'Detached' },
-  { key: 'bungalow', label: 'Bungalow' },
+    { key: 'condo', label: 'Condo' },
+    { key: 'condo-townhouse', label: 'Condo Townhouse' },
+    { key: 'townhouse', label: 'Townhouse' },
+    { key: 'semi-detached', label: 'Semi-detached' },
+    { key: 'detached', label: 'Detached' },
+    { key: 'bungalow', label: 'Bungalow' },
 ];
 
 export const timeframes = [
-  { key: 'immediate', label: 'Immediately' },
-  { key: '1-3months', label: '1-3 months' },
-  { key: '3-6months', label: '3-6 months' },
-  { key: '6month+', label: '6 months+' },
+    { key: 'immediate', label: 'Immediately' },
+    { key: '1-3months', label: '1-3 months' },
+    { key: '3-6months', label: '3-6 months' },
+    { key: '6month+', label: '6 months+' },
 ];
 
 interface HomeBuyerFormValues {
@@ -67,17 +67,30 @@ const HomeBuyers = () => {
     });
 
     const handleSubmit = async (
-        values: HomeBuyerFormValues, 
+        values: HomeBuyerFormValues,
         { resetForm, setSubmitting }: FormikSubmitProps
     ): Promise<void> => {
         setSubmitting(true);
         try {
             // Add data to Firestore
+            const response = await fetch(`https://open.kickbox.com/v1/disposable/${values.email}`);
+            const { disposable } = await response.json();
+            if (disposable) {
+                addToast({
+                    title: "Invalid email",
+                    description: "Please use a valid email address.",
+                    color: "danger"
+                });
+                setSubmitting(false);
+                return;
+            }
+            
             const docRef = await addDoc(collection(db, 'homeBuyers'), {
                 ...values,
                 createdAt: new Date()
             });
-            
+
+
             // Send email with form data
             await sendRealEstateFormEmail({
                 formType: 'homeBuyer',
@@ -90,9 +103,9 @@ const HomeBuyers = () => {
                 additionalInfo: values.additionalInfo,
                 createdAt: new Date()
             });
-            
+
             resetForm();
-            
+
             // Show success toast
             addToast({
                 title: "Success",
@@ -101,7 +114,7 @@ const HomeBuyers = () => {
             });
         } catch (error: unknown) {
             console.error('Error submitting form:', error);
-            
+
             // Show error toast
             addToast({
                 title: "Error",
@@ -150,7 +163,7 @@ const HomeBuyers = () => {
                             label="Phone Number"
                             value={values.phone}
                             onChange={handleChange}
-                            errorMessage={errors.phone  ? errors.phone : undefined}
+                            errorMessage={errors.phone ? errors.phone : undefined}
                             isInvalid={errors.phone != undefined}
                         />
 

@@ -23,11 +23,22 @@ const ModalComp = ({ isOpen, onOpen, onOpenChange, bookHref }: BookDownloadModal
     const [Email, setEmail] = useState("")
     const [name, setName] = useState("")
     const [submitting, setSubmitting] = useState(false)
-    
+
     const handleDownload = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
             setSubmitting(true);
+            const response = await fetch(`https://open.kickbox.com/v1/disposable/${Email}`);
+            const { disposable } = await response.json();
+            if (disposable) {
+                addToast({
+                    title: "Invalid email",
+                    description: "Please use a valid email address.",
+                    color: "danger"
+                });
+                setSubmitting(false);
+                return;
+            }
             
             // Add email to Firestore
             await addDoc(collection(db, "ebookDownloads"), {
@@ -36,16 +47,16 @@ const ModalComp = ({ isOpen, onOpen, onOpenChange, bookHref }: BookDownloadModal
                 bookUrl: bookHref,
                 downloadedAt: serverTimestamp(),
             });
-            
+
             // Open the download
             window.open(bookHref, "_blank");
-            
+
             addToast({
                 title: "Download started",
                 description: "Your download will start shortly.",
                 color: "success"
             });
-            
+
             setSubmitting(false);
             onOpenChange(false);
         } catch (error) {

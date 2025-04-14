@@ -49,17 +49,29 @@ const HomeSeller = () => {
   });
 
   const handleSubmit = async (
-    values: HomeSellerFormValues, 
+    values: HomeSellerFormValues,
     { resetForm, setSubmitting }: FormikSubmitProps
   ) => {
     setSubmitting(true);
     try {
       // Add data to Firestore
+      const response = await fetch(`https://open.kickbox.com/v1/disposable/${values.email}`);
+      const { disposable } = await response.json();
+      if (disposable) {
+        addToast({
+          title: "Invalid email",
+          description: "Please use a valid email address.",
+          color: "danger"
+        });
+        setSubmitting(false);
+        return;
+      }
+      
       const docRef = await addDoc(collection(db, 'homeSellers'), {
         ...values,
         createdAt: new Date()
       });
-      
+
       // Send email with form data
       await sendRealEstateFormEmail({
         formType: 'homeSeller',
@@ -74,9 +86,9 @@ const HomeSeller = () => {
         additionalInfo: values.additionalInfo,
         createdAt: new Date()
       });
-      
+
       resetForm();
-      
+
       // Show success toast
       addToast({
         title: "Success",
@@ -85,7 +97,7 @@ const HomeSeller = () => {
       });
     } catch (error) {
       console.error('Error submitting form:', error);
-      
+
       // Show error toast
       addToast({
         title: "Error",
