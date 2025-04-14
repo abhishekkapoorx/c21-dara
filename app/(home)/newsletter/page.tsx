@@ -101,7 +101,7 @@ const NeweletterPage = () => {
                 <p className="text-base md:text-md text-center md:text-left">Subscribe to our newsletter for the latest market trends, tips, and exclusive property listings.</p>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 w-full place-content-center my-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 w-full place-content-center my-8">
                 <div className="flex flex-col items-center justify-center gap-16">
                     <div className="flex flex-col items-center text-center">
                         <div className="text-amber-500 text-4xl mb-2 w-16 h-16">
@@ -134,7 +134,7 @@ const NeweletterPage = () => {
                     onSubmit={handleSubmit}
                 >
                     {({ isSubmitting, errors, touched, isValid, values, setValues, handleChange }) => (
-                        <FormikForm className="flex flex-col items-center justify-center gap-8 max-w-2xl w-full">
+                        <FormikForm className="flex flex-col items-center justify-center gap-8 max-w-2xl w-full mx-auto">
                             <div className="w-full">
                                 <Input
                                     type="text"
@@ -205,18 +205,21 @@ const NeweletterPage = () => {
                             </div>
 
                             <div className="w-full">
-                                <Checkbox
-                                    type="checkbox"
-                                    className="w-full"
-                                    name="privacyPolicy"
-                                    color="warning"
-                                    isSelected={values.privacyPolicy}
-                                    onChange={handleChange}
-                                    isInvalid={errors.privacyPolicy != undefined}
-                                >
-                                    I agree to receive emails and accept the&nbsp;
-                                    <Link href={"/"} className='text-amber-500'>Privacy Policy</Link>
-                                </Checkbox>
+                                <div className="flex flex-row items-center justify-start gap-2">
+                                    <Checkbox
+                                        type="checkbox"
+                                        className="w-full"
+                                        name="privacyPolicy"
+                                        color="warning"
+                                        isSelected={values.privacyPolicy}
+                                        onChange={handleChange}
+                                        isInvalid={errors.privacyPolicy != undefined}
+                                    >
+                                        I agree to receive emails and accept the&nbsp;
+                                    </Checkbox>
+                                    <Link href={"/privacy-policy"} target='_blank' className='text-amber-500'>Privacy Policy</Link>
+
+                                </div>
                                 {errors.privacyPolicy &&
                                     <div className="text-danger text-sm mt-1">{errors.privacyPolicy}</div>
                                 }
