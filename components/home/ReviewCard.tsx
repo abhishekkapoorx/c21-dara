@@ -1,5 +1,5 @@
 import {Card, CardHeader, CardBody, CardFooter, Divider, Link, Image} from "@heroui/react";
-import { IconStar, IconStarFilled, IconStarHalf, IconStarHalfFilled } from "@tabler/icons-react";
+import { IconBrandGoogle, IconBrandGoogleFilled, IconStar, IconStarFilled, IconStarHalf, IconStarHalfFilled } from "@tabler/icons-react";
 
 export type GoogleReview = {
   reviewId: string | null;
@@ -36,11 +36,11 @@ export default function ReviewCard({review}: {review: GoogleReview}) {
           
         />
         {/* <div className="h-10 w-10 rounded-2xl flex items-center justify-center bg-amber-500 text-black">
-            L
+            {review.reviewer.displayName.slice(0, 1).toUpperCase()}
         </div> */}
         <div className="flex flex-col gap-2">
           <p className="text-lg">{review.reviewer.displayName}</p>
-          <div className="text-small text-default-500 flex gap-1">
+          <div className="text-small text-default-500 flex gap-1 items-center ">
             {Array.from({length: starFilled}).map((_, index) => (
               <IconStarFilled key={index+"asfda4"} size={16} className="text-amber-500"/>
             ))}
@@ -50,13 +50,7 @@ export default function ReviewCard({review}: {review: GoogleReview}) {
             {Array.from({length: starEmpty}).map((_, index) => (
               <IconStar key={index+"54af6d6afa"} size={16} className="text-amber-500"/>
             ))}
-            {/* <IconStarFilled size={16} className="text-amber-500"/>
-
-            <IconStarFilled size={16} className="text-amber-500"/>
-            <IconStarFilled size={16} className="text-amber-500"/>
-            <IconStarFilled size={16} className="text-amber-500"/>
-            <IconStarHalfFilled size={16} className="text-amber-500"/>
-            <IconStar  size={16} className="text-amber-500"/> */}
+            {review.starRating}
 
           </div>
         </div>
@@ -66,11 +60,15 @@ export default function ReviewCard({review}: {review: GoogleReview}) {
         <p>{review.comment}</p>
       </CardBody>
       <Divider />
-      {/* <CardFooter>
-        <Link isExternal showAnchorIcon href="https://github.com/heroui-inc/heroui">
+      <CardFooter>
+        <div className="flex justify-between items-center w-full">
+          <p className="text-default-500 text-xs">{new Date(review.createTime!).toLocaleDateString("en-US", {year: "numeric", month: "long", day: "numeric"})}</p>
+          <IconBrandGoogleFilled size={16} className="text-gray-500 ml-auto"/>
+        </div>
+        {/* <Link isExternal showAnchorIcon href="https://github.com/heroui-inc/heroui">
            
-        </Link>
-      </CardFooter> */}
+        </Link> */}
+      </CardFooter>
     </Card>
   );
 }
