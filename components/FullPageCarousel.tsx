@@ -6,11 +6,16 @@ import { Button, Input } from '@heroui/react';
 
 const CrossfadeSlideshow = () => {
   const images = [
-    "/images/img (1).jpeg",
-    "/images/img (1).jpg",
-    "/images/img (2).jpeg",
-    "/images/img (3).jpg",
-  ];
+    '/images/1.jpg',
+    '/images/2.jpg',
+    '/images/3.jpg',
+    '/images/4.jpg',
+    '/images/5.jpg',
+    '/images/6.jpg',
+    '/images/7.jpeg',
+    '/images/8.jpeg',
+
+  ]
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
