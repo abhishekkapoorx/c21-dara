@@ -22,6 +22,10 @@ interface HomeBuyerProps extends CommonFormProps {
 interface HomeSellerProps extends CommonFormProps {
   formType: 'homeSeller';
   propertyAddress: string;
+  streetAddress?: string;
+  city?: string;
+  province?: string;
+  zipCode?: string;
   bedrooms: number | string;
   bathrooms: number | string;
   squareFeet: number | string;
@@ -32,6 +36,10 @@ interface HomeSellerProps extends CommonFormProps {
 interface HomeEvaluationProps extends CommonFormProps {
   formType: 'homeEvaluation';
   propertyAddress: string;
+  streetAddress?: string;
+  city?: string;
+  province?: string;
+  zipCode?: string;
   propertyType: string;
   bedrooms: number | string;
   bathrooms: number | string;

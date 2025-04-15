@@ -1,7 +1,7 @@
 import React from 'react';
 import { Heading } from '../TextComps';
 import { Button, Input, Select, SelectItem, Textarea, addToast } from '@heroui/react';
-import { FormikSubmitProps, propertyTypes } from './HomeBuyers';
+import { FormikSubmitProps, propertyTypes, provinces } from './HomeBuyers';
 import { Formik, Form as FormikForm, FormikFormProps, FormikProps } from 'formik';
 import * as Yup from 'yup';
 import { db } from '@/firebase';
@@ -12,7 +12,10 @@ interface HomeEvaluationFormValues {
   fullName: string;
   email: string;
   phone: string;
-  propertyAddress: string;
+  streetAddress: string;
+  city: string;
+  province: string;
+  zipCode: string;
   propertyType: string;
   bedrooms: string | number;
   bathrooms: string | number;
@@ -26,7 +29,10 @@ const HomeEvaluation = () => {
     fullName: '',
     email: '',
     phone: '',
-    propertyAddress: '',
+    streetAddress: '',
+    city: '',
+    province: '',
+    zipCode: '',
     propertyType: '',
     bedrooms: '',
     bathrooms: '',
@@ -39,7 +45,11 @@ const HomeEvaluation = () => {
     fullName: Yup.string().required('Full name is required'),
     email: Yup.string().email('Invalid email').required('Email is required'),
     phone: Yup.string().required('Phone number is required').min(10, 'Phone number must be at least 10 digits').max(10, 'Phone number must be at most 10 digits'),
-    propertyAddress: Yup.string().required('Property address is required'),
+    streetAddress: Yup.string().required('Street address is required'),
+    city: Yup.string().required('City is required'),
+    province: Yup.string().required('Province is required'),
+    zipCode: Yup.string().required('Postal code is required')
+      .matches(/^[A-Za-z0-9]{3}\s[A-Za-z0-9]{3}$/, 'Postal code format must be XXX XXX'),
     propertyType: Yup.string().required('Property type is required'),
     bedrooms: Yup.number().min(0, 'Bedrooms must be at least 0').required('Bedrooms are required'),
     bathrooms: Yup.number().min(0, 'Bathrooms must be at least 0').required('Bathrooms are required'),
@@ -67,10 +77,17 @@ const HomeEvaluation = () => {
         return;
       }
 
+      // Combine address fields for Firestore
+      const propertyAddress = `${values.streetAddress}, ${values.city}, ${values.province}, ${values.zipCode}`;
+
       await addDoc(collection(db, 'homeEvaluations'), {
         ...values,
+        propertyAddress,
         createdAt: new Date()
       });
+
+      // Get province label for email
+      const provinceLabel = provinces.find(p => p.key === values.province)?.label || values.province;
 
       // Send email with form data
       await sendRealEstateFormEmail({
@@ -78,7 +95,11 @@ const HomeEvaluation = () => {
         fullName: values.fullName,
         email: values.email,
         phone: values.phone,
-        propertyAddress: values.propertyAddress,
+        propertyAddress: propertyAddress,
+        streetAddress: values.streetAddress,
+        city: values.city,
+        province: provinceLabel,
+        zipCode: values.zipCode,
         propertyType: propertyTypes.find(type => type.key === values.propertyType)?.label || values.propertyType,
         bedrooms: values.bedrooms,
         bathrooms: values.bathrooms,
@@ -151,16 +172,59 @@ const HomeEvaluation = () => {
               isInvalid={errors.phone != undefined}
             />
 
-            <Input
-              type="text"
-              placeholder="123 Main Street, City, State, ZIP"
-              name="propertyAddress"
-              label="Property Address"
-              value={values.propertyAddress}
-              onChange={handleChange}
-              errorMessage={errors.propertyAddress ? errors.propertyAddress : undefined}
-              isInvalid={errors.propertyAddress != undefined}
-            />
+            <div className="w-full">
+              <p className="text-sm font-medium mb-2">Property Address</p>
+              <div className="flex flex-col gap-4 w-full">
+                <Input
+                  type="text"
+                  placeholder="Street Address"
+                  name="streetAddress"
+                  label="Street Address"
+                  value={values.streetAddress}
+                  onChange={handleChange}
+                  errorMessage={errors.streetAddress ? errors.streetAddress : undefined}
+                  isInvalid={errors.streetAddress != undefined}
+                />
+
+                <div className="grid grid-cols-2 gap-4">
+                  <Input
+                    type="text"
+                    placeholder="City"
+                    name="city"
+                    label="City"
+                    value={values.city}
+                    onChange={handleChange}
+                    errorMessage={errors.city ? errors.city : undefined}
+                    isInvalid={errors.city != undefined}
+                  />
+
+                  <Select
+                    name="province"
+                    label="Province"
+                    placeholder="Select Province"
+                    value={values.province}
+                    onChange={handleChange}
+                    errorMessage={errors.province ? errors.province : undefined}
+                    isInvalid={errors.province != undefined}
+                  >
+                    {provinces.map((province) => (
+                      <SelectItem key={province.key}>{province.label}</SelectItem>
+                    ))}
+                  </Select>
+                </div>
+
+                <Input
+                  type="text"
+                  placeholder="Postal Code (XXX XXX)"
+                  name="zipCode"
+                  label="Postal Code"
+                  value={values.zipCode}
+                  onChange={handleChange}
+                  errorMessage={errors.zipCode ? errors.zipCode : undefined}
+                  isInvalid={errors.zipCode != undefined}
+                />
+              </div>
+            </div>
 
             <Select
               name="propertyType"

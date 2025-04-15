@@ -30,6 +30,22 @@ export const timeframes = [
     { key: '6month+', label: '6 months+' },
 ];
 
+export const provinces = [
+    { key: 'AB', label: 'Alberta' },
+    { key: 'BC', label: 'British Columbia' },
+    { key: 'MB', label: 'Manitoba' },
+    { key: 'NB', label: 'New Brunswick' },
+    { key: 'NL', label: 'Newfoundland and Labrador' },
+    { key: 'NS', label: 'Nova Scotia' },
+    { key: 'NT', label: 'Northwest Territories' },
+    { key: 'NU', label: 'Nunavut' },
+    { key: 'ON', label: 'Ontario' },
+    { key: 'PE', label: 'Prince Edward Island' },
+    { key: 'QC', label: 'Quebec' },
+    { key: 'SK', label: 'Saskatchewan' },
+    { key: 'YT', label: 'Yukon' },
+];
+
 interface HomeBuyerFormValues {
     fullName: string;
     email: string;
