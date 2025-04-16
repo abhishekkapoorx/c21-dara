@@ -152,7 +152,7 @@ const MortgageCalculatorComp = () => {
                         </div>
                         <div className="flex flex-col">
                             <span className="text-xs uppercase tracking-wider text-amber-500 mb-1">Monthly Interest Rate</span>
-                            <span className="text-2xl font-medium">{parseFloat(outputs.monthlyInterestRate) * 100}%</span>
+                            <span className="text-2xl font-medium">{(parseFloat(outputs.monthlyInterestRate) * 100).toFixed(3)}%</span>
                         </div>
                         <div className="flex flex-col">
                             <span className="text-xs uppercase tracking-wider text-amber-500 mb-1">Monthly Payment</span>
