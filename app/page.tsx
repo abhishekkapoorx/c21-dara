@@ -1,5 +1,6 @@
 import ContentCarousel from "@/components/home/ContentCarousel";
 import HeroTextComp from "@/components/home/HeroTextComp";
+import Listings from "@/components/home/Listings";
 import ReviewComp from "@/components/home/ReviewComp";
 
 
@@ -12,6 +13,7 @@ export default function Home() {
       <ContentCarousel />
       <HeroTextComp />
       <ReviewComp />
+      <Listings/>
 
       
       {/* <div id="featurable-688365eb-fc4b-4a5f-bea5-2fbf262f63dd" data-featurable-async ></div>

@@ -67,13 +67,6 @@ const ReviewComp = () => {
           {/* <ReactGoogleReviews layout="carousel" featurableId={featurableWidgetId} theme='dark' /> */}
         </div>
 
-        {/* <div className="col-span-4 lg:col-span-3 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-8 place-items-center">
-          <ReviewCard />
-          <ReviewCard />
-          <ReviewCard />
-          <ReviewCard />
-        </div> */}
-
       </div>
 
     </div>
