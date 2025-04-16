@@ -26,6 +26,11 @@ const MortgageCalculatorComp = () => {
 
     const [outputs, setOutputs] = useState<CalculationOutputs | null>(null)
 
+    // Check if all required fields are filled
+    const isFormValid = () => {
+        return homePrice > 0 && downPayment > 0 && paymentTerm > 0 && interestRate > 0;
+    }
+
     const calculate = () => {
         const principal = homePrice - downPayment;
         const termInMonths = paymentTerm * 12;
@@ -130,7 +135,7 @@ const MortgageCalculatorComp = () => {
                 min={0.01}
                 step={0.01}
             />
-            <Button title='Calculate' color='warning' variant='shadow' className="w-full" onPress={calculate}>Calculate</Button>
+            <Button title='Calculate' color='warning' variant='shadow' className="w-full" onPress={calculate} isDisabled={!isFormValid()}>Calculate</Button>
 
             {outputs && (
                 <div className="w-full p-8 border-0 shadow-sm rounded-lg mt-8">

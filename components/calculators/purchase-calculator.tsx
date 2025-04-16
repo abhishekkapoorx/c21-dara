@@ -21,6 +21,13 @@ const PurchaseCalComp = () => {
     }
     const [outputs, setOutputs] = useState<CalculationOutputs | null>(null)
 
+    // Check if all required fields are filled
+    const isFormValid = () => {
+        console.log(purchasePrice, downPayment, paymentTerm, interestRate, propertyTax, insurance)
+        return purchasePrice > 0 && downPayment >= 0 && paymentTerm > 0 && 
+               interestRate > 0 && propertyTax > 0 && insurance > 0;
+    }
+
     const calculate = () => {
         // Ensure we have valid inputs
         if (!purchasePrice || !paymentTerm) return;
@@ -79,8 +86,11 @@ const PurchaseCalComp = () => {
                 startContent={
                     <span className="">$</span>
                 }
-                value={downPayment === 0 ? '' : downPayment.toString()}
-                onChange={(e) => setDownPayment(Number(e.target.value))}
+                value={downPayment === 0 ? '' : downPayment > purchasePrice ? purchasePrice.toString() : downPayment.toString()}
+                onChange={(e) => { 
+                    const value = Number(e.target.value);
+                    setDownPayment(value > purchasePrice ? purchasePrice : value);
+                }}
                 min={0.01}
                 step={0.01}
                 max={purchasePrice}
@@ -155,38 +165,15 @@ const PurchaseCalComp = () => {
                 variant='shadow'
                 className="w-full"
                 onPress={calculate}
+                isDisabled={!isFormValid()}
             >
                 Calculate
             </Button>
 
-            {/* {outputs && (
-                <div className="w-full p-4 border rounded-lg mt-4">
-                    <h3 className="text-xl font-bold mb-3">Mortgage Summary</h3>
-                    <div className="grid grid-cols-2 gap-2">
-                        <p>Loan Amount:</p>
-                        <p className="font-semibold">${outputs.principal}</p>
-
-                        <p>Monthly Payment:</p>
-                        <p className="font-semibold">${outputs.monthlyPayment}</p>
-
-                        <p>Total Payments:</p>
-                        <p className="font-semibold">${outputs.totalPayment}</p>
-
-                        <p>Total Interest:</p>
-                        <p className="font-semibold">${outputs.totalInterest}</p>
-                    </div>
-                </div>
-            )} */}
             {outputs && (
                 <div className="w-full p-8 border-0 shadow-sm rounded-lg mt-8">
                     <h3 className="text-2xl font-bold mb-6 tracking-tight">Summary</h3>
                     <div className="grid grid-cols-1 gap-y-6 md:grid-cols-2 md:gap-x-12">
-                        {/* {Object.keys(outputs).map((key) => (
-                            <div key={key} className="flex flex-col">
-                                <span className="text-xs uppercase tracking-wider text-amber-500 mb-1">{key.replace(/([A-Z])/g, ' $1')}</span>
-                                <span className="text-2xl font-medium">${outputs[key as keyof CalculationOutputs]}</span>
-                            </div>
-                        ))} */}
                         <div className="flex flex-col">
                             <span className="text-xs uppercase tracking-wider text-amber-500 mb-1">Principal</span>
                             <span className="text-2xl font-medium">${outputs.principal}</span>

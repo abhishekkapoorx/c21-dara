@@ -18,6 +18,11 @@ const MortgageCalculatorComp = () => {
     const [interestRate, setInterestRate] = React.useState(0)
     const [outputs, setOutputs] = React.useState<CalculationOutputs | null>(null)
 
+    // Check if all required fields are filled
+    const isFormValid = () => {
+        return PurchasePrice > 0 && downPayment >= 0 && paymentTerm > 0 && interestRate > 0;
+    }
+
     const calculate = () => {
 
         // Basic calculations
@@ -72,8 +77,11 @@ const MortgageCalculatorComp = () => {
                 startContent={
                     <span className="">$</span>
                 }
-                value={downPayment === 0 ? '' : downPayment.toString()}
-                onChange={(e) => setDownPayment(Number(e.target.value))}
+                value={downPayment === 0 ? '' : downPayment > PurchasePrice ? PurchasePrice.toString() : downPayment.toString()}
+                onChange={(e) => {
+                    const value = Number(e.target.value);
+                    setDownPayment(value > PurchasePrice ? PurchasePrice : value);
+                }}
                 min={0.01}
                 step={0.01}
                 max={PurchasePrice}
@@ -130,7 +138,7 @@ const MortgageCalculatorComp = () => {
                 isRequired
                 onChange={(e) => setInterestRate(Number(e.target.value))}
             />
-            <Button title='Calculate' color='warning' variant='shadow' className="w-full" onPress={calculate}>Calculate</Button>
+            <Button title='Calculate' color='warning' variant='shadow' className="w-full" onPress={calculate} isDisabled={!isFormValid()}>Calculate</Button>
 
             {outputs && (
                 <div className="w-full p-8 border-0 shadow-sm rounded-lg mt-8">
