@@ -135,6 +135,21 @@ const PurchaseCalComp = () => {
             </Select>
             <Input
                 type="number"
+                placeholder="Interest Rate"
+                label="Interest Rate"
+                className="w-full"
+                value={interestRate === 0 ? '' : interestRate.toString()}
+                onChange={(e) => setInterestRate(Number(e.target.value))}
+                min={0.01}
+                step={0.001}
+                required
+                isRequired
+                endContent={
+                    <span className="">%</span>
+                }
+            />
+            <Input
+                type="number"
                 placeholder="Annual Property Tax"
                 label="Annual Property Tax"
                 className="w-full"

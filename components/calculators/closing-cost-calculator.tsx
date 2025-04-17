@@ -94,7 +94,7 @@ const MortgageCalculatorComp = () => {
                 color="warning"
                 defaultValue={downPayment / PurchasePrice * 100}
                 label="Select Down Payment Percentage"
-                value={downPayment / PurchasePrice * 100}
+                value={PurchasePrice ? (downPayment / PurchasePrice * 100) : 0}
                 onChange={(value) => setDownPayment(PurchasePrice * (Number(value) / 100))}
                 marks={[
                     {
