@@ -2,6 +2,21 @@ import { Button, Input, Select, SelectItem, Slider } from '@heroui/react'
 import React from 'react'
 import { paymentTerms } from './mortgage-calculator';
 
+// Currency formatter
+const currencyFormatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+});
+
+// Percentage formatter
+const percentFormatter = new Intl.NumberFormat('en-US', {
+    style: 'percent',
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+});
+
 interface CalculationOutputs {
     loanAmount: number;
     monthlyPayment: number;
@@ -146,23 +161,23 @@ const MortgageCalculatorComp = () => {
                     <div className="grid grid-cols-1 gap-y-6 md:grid-cols-2 md:gap-x-12">
                         <div className="flex flex-col">
                             <span className="text-xs uppercase tracking-wider text-amber-500 mb-1">Loan Amount</span>
-                            <span className="text-2xl font-medium">${outputs.loanAmount.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
+                            <span className="text-2xl font-medium">{currencyFormatter.format(outputs.loanAmount)}</span>
                         </div>
                         <div className="flex flex-col">
                             <span className="text-xs uppercase tracking-wider text-amber-500 mb-1">Monthly Payment</span>
-                            <span className="text-2xl font-medium">${outputs.monthlyPayment.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
+                            <span className="text-2xl font-medium">{currencyFormatter.format(outputs.monthlyPayment)}</span>
                         </div>
                         <div className="flex flex-col">
                             <span className="text-xs uppercase tracking-wider text-amber-500 mb-1">Total Interest</span>
-                            <span className="text-2xl font-medium">${outputs.totalInterest.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
+                            <span className="text-2xl font-medium">{currencyFormatter.format(outputs.totalInterest)}</span>
                         </div>
                         <div className="flex flex-col">
                             <span className="text-xs uppercase tracking-wider text-amber-500 mb-1">Total Cost</span>
-                            <span className="text-2xl font-medium">${outputs.totalCost.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
+                            <span className="text-2xl font-medium">{currencyFormatter.format(outputs.totalCost)}</span>
                         </div>
                         <div className="flex flex-col">
                             <span className="text-xs uppercase tracking-wider text-amber-500 mb-1">Down Payment Percent</span>
-                            <span className="text-2xl font-medium">{outputs.downPaymentPercent.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}%</span>
+                            <span className="text-2xl font-medium">{percentFormatter.format(outputs.downPaymentPercent / 100)}</span>
                         </div>
 
                     </div>

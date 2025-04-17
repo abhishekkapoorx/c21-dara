@@ -1,6 +1,21 @@
 import { Button, Input, Select, SelectItem, Slider } from '@heroui/react'
 import React, { useState } from 'react'
 
+// Currency formatter
+const currencyFormatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+});
+
+// Percentage formatter
+const percentFormatter = new Intl.NumberFormat('en-US', {
+    style: 'percent',
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 4
+});
+
 export const paymentTerms = [
     { key: 10, label: '10 years' },
     { key: 15, label: '15 years' },
@@ -16,12 +31,12 @@ const MortgageCalculatorComp = () => {
     const [interestRate, setInterestRate] = React.useState(0)
 
     interface CalculationOutputs {
-        principal: string;
+        principal: number;
         termInMonths: number;
-        monthlyInterestRate: string;
-        monthlyPayment: string;
-        totalPayment: string;
-        totalInterest: string;
+        monthlyInterestRate: number;
+        monthlyPayment: number;
+        totalPayment: number;
+        totalInterest: number;
     }
 
     const [outputs, setOutputs] = useState<CalculationOutputs | null>(null)
@@ -40,12 +55,12 @@ const MortgageCalculatorComp = () => {
         const totalInterest = totalPayment - principal;
 
         setOutputs({
-            principal: principal.toFixed(2),
+            principal: principal,
             termInMonths: termInMonths,
-            monthlyInterestRate: monthlyInterestRate.toFixed(4),
-            monthlyPayment: monthlyPayment.toFixed(2),
-            totalPayment: totalPayment.toFixed(2),
-            totalInterest: totalInterest.toFixed(2),
+            monthlyInterestRate: monthlyInterestRate,
+            monthlyPayment: monthlyPayment,
+            totalPayment: totalPayment,
+            totalInterest: totalInterest,
         });
     }
 
@@ -141,35 +156,17 @@ const MortgageCalculatorComp = () => {
                 <div className="w-full p-8 border-0 shadow-sm rounded-lg mt-8">
                     <h3 className="text-2xl font-bold mb-6 tracking-tight">Summary</h3>
                     <div className="grid grid-cols-1 gap-y-6 md:grid-cols-2 md:gap-x-12">
-                        {/* {Object.keys(outputs).map((key) => (
-                            <div key={key} className="flex flex-col">
-                                <span className="text-xs uppercase tracking-wider text-amber-500 mb-1">{key.replace(/([A-Z])/g, ' $1')}</span>
-                                <span className="text-2xl font-medium">${outputs[key as keyof CalculationOutputs]}</span>
-                            </div>
-                        ))} */}
-                        <div className="flex flex-col">
-                            <span className="text-xs uppercase tracking-wider text-amber-500 mb-1">Principal</span>
-                            <span className="text-2xl font-medium">${outputs.principal}</span>
-                        </div>
-                        <div className="flex flex-col">
-                            <span className="text-xs uppercase tracking-wider text-amber-500 mb-1">Term In Months</span>
-                            <span className="text-2xl font-medium">{outputs.termInMonths}</span>
-                        </div>
-                        <div className="flex flex-col">
-                            <span className="text-xs uppercase tracking-wider text-amber-500 mb-1">Monthly Interest Rate</span>
-                            <span className="text-2xl font-medium">{(parseFloat(outputs.monthlyInterestRate) * 100).toFixed(3)}%</span>
-                        </div>
                         <div className="flex flex-col">
                             <span className="text-xs uppercase tracking-wider text-amber-500 mb-1">Monthly Payment</span>
-                            <span className="text-2xl font-medium">${outputs.monthlyPayment}</span>
+                            <span className="text-2xl font-medium">{currencyFormatter.format(outputs.monthlyPayment)}</span>
                         </div>
                         <div className="flex flex-col">
                             <span className="text-xs uppercase tracking-wider text-amber-500 mb-1">Total Payment</span>
-                            <span className="text-2xl font-medium">${outputs.totalPayment}</span>
+                            <span className="text-2xl font-medium">{currencyFormatter.format(outputs.totalPayment)}</span>
                         </div>
                         <div className="flex flex-col">
                             <span className="text-xs uppercase tracking-wider text-amber-500 mb-1">Total Interest</span>
-                            <span className="text-2xl font-medium">${outputs.totalInterest}</span>
+                            <span className="text-2xl font-medium">{currencyFormatter.format(outputs.totalInterest)}</span>
                         </div>
 
                     </div>
