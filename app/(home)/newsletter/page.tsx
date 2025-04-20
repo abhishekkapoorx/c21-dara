@@ -116,7 +116,7 @@ const NeweletterPage = () => {
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 w-full place-content-center my-8">
                 <div className="flex flex-col items-center justify-center gap-16">
-                    <div className="flex flex-col items-center text-center">
+                    <div className="flex flex-col items-center text-center hover:-translate-y-2 transition-all duration-300 ease-in-out">
                         <div className="text-amber-500 text-4xl mb-2 w-16 h-16">
                             <IconTrendingUp className='w-full h-full'></IconTrendingUp>
                         </div>
@@ -124,7 +124,7 @@ const NeweletterPage = () => {
                         <p className="text-base text-gray-300">Get the latest real estate market trends and insights.</p>
                     </div>
 
-                    <div className="flex flex-col items-center text-center">
+                    <div className="flex flex-col items-center text-center hover:-translate-y-2 transition-all duration-300 ease-in-out">
                         <div className="text-amber-500 text-4xl mb-2 w-16 h-16">
                             <IconHome className='w-full h-full'></IconHome>
                         </div>
@@ -132,7 +132,7 @@ const NeweletterPage = () => {
                         <p className="text-base text-gray-300">Be the first to know about new property listings.</p>
                     </div>
 
-                    <div className="flex flex-col items-center text-center">
+                    <div className="flex flex-col items-center text-center hover:-translate-y-2 transition-all duration-300 ease-in-out">
                         <div className="text-amber-500 text-4xl mb-2 w-16 h-16">
                             <IconBulbFilled className='w-full h-full'></IconBulbFilled>
                         </div>
