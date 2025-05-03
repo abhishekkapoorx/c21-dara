@@ -33,10 +33,9 @@ import { useRouter } from "next/navigation";
 
 
 
-export const Navbar = ({ session }: { session: Session | null }) => {
+export const Navbar = () => {
 
   const pathname = usePathname();
-  const user = session?.user
   
   const router = useRouter();
 

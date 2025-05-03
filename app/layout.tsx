@@ -3,10 +3,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import clsx from "clsx";
 import { Metadata, Viewport } from "next";
-
 import { Providers } from "./providers";
-
-import { auth } from "@/auth";
 import { Navbar } from "@/components/navbar";
 import { fontSans } from "@/config/fonts";
 import { siteConfig } from "@/config/site";
@@ -20,7 +17,7 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   icons: {
-    icon: "/images/logo.png",
+    icon: "/images/logo-transformed.webp",
   },
 };
 
@@ -37,7 +34,6 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
 
-  const session = await auth();
 
   return (
     <html suppressHydrationWarning lang="en">
@@ -52,7 +48,7 @@ export default async function RootLayout({
         <SpeedInsights />
         <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
           <div className="relative flex flex-col min-h-screen">
-            <Navbar session={session}/>            
+            <Navbar/>            
             <FloatingIcons/>
             <main className="flex flex-grow w-full justify-center items-start">
               {children}
