@@ -247,7 +247,7 @@ const MortgageCalculatorComp = () => {
                     </div>
                     
                     <div className="text-xs text-gray-500 mt-4">
-                        Note: The principal and interest amounts shown are for the first month's payment. 
+                        Note: The principal and interest amounts shown are for the first month&apos;s payment. 
                         As time passes, more of your payment will go toward principal and less toward interest.
                     </div>
                 </div>

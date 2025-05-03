@@ -335,7 +335,7 @@ const PurchaseCalComp = () => {
                     </div>
                     
                     <div className="text-xs text-gray-500 mt-4">
-                        Note: The principal and interest amounts shown are for the first month's payment. 
+                        Note: The principal and interest amounts shown are for the first month&apos;s payment. 
                         As your loan is paid down, more of your payment will go toward principal and less toward interest.
                         Property tax and insurance amounts remain constant (unless adjusted for inflation or reassessment).
                     </div>
