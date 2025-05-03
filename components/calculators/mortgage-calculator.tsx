@@ -41,6 +41,16 @@ const MortgageCalculatorComp = () => {
 
     const [outputs, setOutputs] = useState<CalculationOutputs | null>(null)
 
+    // Set minimum down payment to 5% when home price changes
+    React.useEffect(() => {
+        if (homePrice > 0) {
+            const minDownPayment = homePrice * 0.05;
+            if (downPayment < minDownPayment) {
+                setDownPayment(minDownPayment);
+            }
+        }
+    }, [homePrice]);
+
     // Check if all required fields are filled
     const isFormValid = () => {
         return homePrice > 0 && downPayment > 0 && paymentTerm > 0 && interestRate > 0;
@@ -91,8 +101,12 @@ const MortgageCalculatorComp = () => {
                     <span className="">$</span>
                 }
                 value={downPayment === 0 ? '' : downPayment > homePrice ? homePrice.toString() : downPayment.toString()}
-                onChange={(e) => { setDownPayment(Number(e.target.value)) }}
-                min={0.01}
+                onChange={(e) => { 
+                    const value = Number(e.target.value);
+                    const minDownPayment = homePrice * 0.05;
+                    setDownPayment(value < minDownPayment ? minDownPayment : (value > homePrice ? homePrice : value));
+                }}
+                min={homePrice * 0.05}
                 step={0.01}
                 defaultValue='1'
                 max={homePrice}
@@ -103,10 +117,16 @@ const MortgageCalculatorComp = () => {
                 className="w-full"
                 color="warning"
                 defaultValue={downPayment / homePrice * 100}
+                minValue={5}
+                maxValue={100}
                 label="Select Down Payment Percentage"
-                value={homePrice ? (downPayment / homePrice * 100) : 0}
+                value={homePrice ? (downPayment / homePrice * 100) : 5}
                 onChange={(value) => setDownPayment(homePrice * (Number(value) / 100))}
                 marks={[
+                    {
+                        value: 5,
+                        label: "5%",
+                    },
                     {
                         value: 20,
                         label: "20%",
@@ -120,7 +140,6 @@ const MortgageCalculatorComp = () => {
                         label: "80%",
                     },
                 ]}
-            // size="sm"
             />
             <Select
                 className="w-full"

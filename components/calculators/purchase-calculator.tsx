@@ -25,6 +25,16 @@ const PurchaseCalComp = () => {
     const [propertyTax, setPropertyTax] = React.useState(0)
     const [insurance, setInsurance] = React.useState(0)
 
+    // Set minimum down payment to 5% when purchase price changes
+    React.useEffect(() => {
+        if (purchasePrice > 0) {
+            const minDownPayment = purchasePrice * 0.05;
+            if (downPayment < minDownPayment) {
+                setDownPayment(minDownPayment);
+            }
+        }
+    }, [purchasePrice]);
+
     type CalculationOutputs = {
         principal: number;
         termInMonths: number;
@@ -102,9 +112,10 @@ const PurchaseCalComp = () => {
                 value={downPayment === 0 ? '' : downPayment > purchasePrice ? purchasePrice.toString() : downPayment.toString()}
                 onChange={(e) => { 
                     const value = Number(e.target.value);
-                    setDownPayment(value > purchasePrice ? purchasePrice : value);
+                    const minDownPayment = purchasePrice * 0.05;
+                    setDownPayment(value < minDownPayment ? minDownPayment : (value > purchasePrice ? purchasePrice : value));
                 }}
-                min={0.01}
+                min={purchasePrice * 0.05}
                 step={0.01}
                 max={purchasePrice}
                 required
@@ -114,10 +125,16 @@ const PurchaseCalComp = () => {
                 className="w-full"
                 color="warning"
                 defaultValue={0}
+                minValue={5}
+                maxValue={100}
                 label="Select Down Payment Percentage"
-                value={purchasePrice ? (downPayment / purchasePrice * 100) : 0}
+                value={purchasePrice ? (downPayment / purchasePrice * 100) : 5}
                 onChange={(value) => setDownPayment(purchasePrice * (Number(value) / 100))}
                 marks={[
+                    {
+                        value: 5, 
+                        label: "5%",
+                    },
                     {
                         value: 20,
                         label: "20%",
@@ -201,18 +218,6 @@ const PurchaseCalComp = () => {
                 <div className="w-full p-8 border-0 shadow-sm rounded-lg mt-8">
                     <h3 className="text-2xl font-bold mb-6 tracking-tight">Summary</h3>
                     <div className="grid grid-cols-1 gap-y-6 md:grid-cols-2 md:gap-x-12">
-                        {/* <div className="flex flex-col">
-                            <span className="text-xs uppercase tracking-wider text-amber-500 mb-1">Principal</span>
-                            <span className="text-2xl font-medium">${outputs.principal}</span>
-                        </div> */}
-                        {/* <div className="flex flex-col">
-                            <span className="text-xs uppercase tracking-wider text-amber-500 mb-1">Term In Months</span>
-                            <span className="text-2xl font-medium">{outputs.termInMonths} months</span>
-                        </div> */}
-                        {/* <div className="flex flex-col">
-                            <span className="text-xs uppercase tracking-wider text-amber-500 mb-1">Monthly Interest Rate</span>
-                            <span className="text-2xl font-medium">{outputs.monthlyInterestRate}%</span>
-                        </div> */}
                         <div className="flex flex-col">
                             <span className="text-xs uppercase tracking-wider text-amber-500 mb-1">Monthly Payment</span>
                             <span className="text-2xl font-medium">{currencyFormatter.format(outputs.monthlyPayment)}</span>

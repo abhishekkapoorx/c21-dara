@@ -62,6 +62,16 @@ const ClosingCostCalculatorComp = () => {
     const [mortgageInsurancePST, setMortgageInsurancePST] = React.useState(0)
     const [outputs, setOutputs] = React.useState<CalculationOutputs | null>(null)
 
+    // Set minimum down payment to 5% when purchase price changes
+    React.useEffect(() => {
+        if (purchasePrice > 0) {
+            const minDownPayment = purchasePrice * 0.05;
+            if (downPayment < minDownPayment) {
+                setDownPayment(minDownPayment);
+            }
+        }
+    }, [purchasePrice]);
+
     // Calculate Ontario Land Transfer Tax
     const calculateOntarioLTT = (price: number) => {
         let tax = 0;
@@ -305,8 +315,8 @@ const ClosingCostCalculatorComp = () => {
 
     return (
         <div className="flex flex-col items-center justify-center gap-8 max-w-2xl w-full">
-            <h2 className="text-2xl font-bold mb-0">Closing Cost Calculator</h2>
-            <p className="text-center mt-0 text-gray-600">Estimate your closing costs including land transfer taxes</p>
+            {/* <h2 className="text-2xl font-bold mb-0">Closing Cost Calculator</h2>
+            <p className="text-center text-gray-400">Estimate your closing costs including land transfer taxes</p> */}
             
             <Input
                 type="number"
@@ -335,9 +345,10 @@ const ClosingCostCalculatorComp = () => {
                 value={downPayment === 0 ? '' : downPayment > purchasePrice ? purchasePrice.toString() : downPayment.toString()}
                 onChange={(e) => {
                     const value = Number(e.target.value);
-                    setDownPayment(value > purchasePrice ? purchasePrice : value);
+                    const minDownPayment = purchasePrice * 0.05;
+                    setDownPayment(value < minDownPayment ? minDownPayment : (value > purchasePrice ? purchasePrice : value));
                 }}
-                min={0}
+                min={purchasePrice * 0.05}
                 step={0.01}
                 max={purchasePrice}
             />
@@ -347,8 +358,10 @@ const ClosingCostCalculatorComp = () => {
                 color="warning"
                 defaultValue={0}
                 label="Select Down Payment Percentage"
-                value={purchasePrice ? (downPayment / purchasePrice * 100) : 0}
+                value={purchasePrice ? (downPayment / purchasePrice * 100) : 5}
                 onChange={(value) => setDownPayment(purchasePrice * (Number(value) / 100))}
+                minValue={5}
+                maxValue={100}
                 marks={[
                     {
                         value: 5,
@@ -361,6 +374,10 @@ const ClosingCostCalculatorComp = () => {
                     {
                         value: 50,
                         label: "50%",
+                    },
+                    {
+                        value: 100,
+                        label: "100%",
                     },
                 ]}
             />
