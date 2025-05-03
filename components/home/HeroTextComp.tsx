@@ -21,7 +21,7 @@ const HeroTextComp = () => {
 
   ];
 
-  
+
   return (
     <div className="flex items-center justify-center w-full py-16 min-h-[80vh] px-8 bg-white">
       <div className="flex flex-col lg:flex-row gap-4 lg:gap-8 w-full h-full max-w-7xl justify-center items-center">
@@ -35,21 +35,20 @@ const HeroTextComp = () => {
             Your trusted partner in real estate, backed by Century 21&apos;s legacy of excellence. Karandeep Dara brings expertise and dedication to every transaction.
           </p>
         </div>
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0.5, scale: 0.8, y: 100 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          
-        
-        className="flex items-center justify-center gap-4 rounded-2xl h-full w-full bg-center bg-cover">
-          <div className="w-full max-w-md h-[400px] relative rounded-2xl overflow-hidden shadow-lg bg-center bg-cover">
-          {/* <BackgroundImage images={agentImages} /> */}
-          <Image
-            src={"/images/agent11.PNG"}
-            alt="Dara Dream Realtor"
-            width={300}
-            height={300}
-            className="shadow-lg bg-center object-cover w-full rounded-2xl h-full max-h-[60vh] m-2 max-w-md bg-cover"
-          />
+          className="flex items-center justify-center gap-4 rounded-2xl h-full w-full bg-center bg-cover">
+          <div className="w-full max-w-md h-[600px] relative rounded-2xl overflow-hidden shadow-lg hover:md:-translate-y-3 transition-all duration-300 ease-in-out">
+            {/* <BackgroundImage images={agentImages} /> */}
+            <Image
+              src={"/images/agent11.PNG"}
+              alt="Dara Dream Realtor"
+              // width={300}
+              // height={600}
+              fill
+              className="shadow-lg w-full rounded-2xl h-full bg-bottom object-bottom max-w-md bg-cover object-cover"
+            />
 
           </div>
         </motion.div>
