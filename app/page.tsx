@@ -13,11 +13,7 @@ export default function Home() {
       <ContentCarousel />
       <HeroTextComp />
       <ReviewComp />
-      <Listings/>
-
-      
-      {/* <div id="featurable-688365eb-fc4b-4a5f-bea5-2fbf262f63dd" data-featurable-async ></div>
-      <script src="https://featurable.com/assets/bundle.js" defer></script> */}
+      {/* <Listings/> */}
 
     </section>
   );
