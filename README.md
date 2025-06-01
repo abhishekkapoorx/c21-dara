@@ -109,6 +109,8 @@ NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET = "your-project-id.appspot.com"
 NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID = "your-messaging-sender-id"
 NEXT_PUBLIC_FIREBASE_APP_ID = "your-app-id"
 NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID = "your-measurement-id"
+
+NEXT_PUBLIC_RECAPTCHA_SITE_KEY = "your-recaptcha-site-key"
 ```
 
 ### Firebase Setup
@@ -136,6 +138,18 @@ NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID = "your-measurement-id"
    - Go to "Storage" in your Firebase console
    - Click "Get started" and follow the setup steps
    - Set up rules to allow authenticated read/write access
+    
+     ```js
+     rules_version = '2';
+      service cloud.firestore {
+        match /databases/{database}/documents {
+          match /{document=**} {
+            allow read, write: if request.app != null; // Only from your app with App Check
+          }
+        }
+      }
+
+     ```
 
 
 ## Running the Application
