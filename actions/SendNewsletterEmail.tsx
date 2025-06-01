@@ -22,14 +22,14 @@ export default async function SendNewsletterEmail(values: NewsletterFormvalues):
     try {
         const emailSent = await resend.batch.send([
             {
-                from: 'Dara Dream Realty <onboarding@resend.dev>',
+                from: `Dara Dream Realty <${process.env.ADMIN_EMAIL}>`,
                 to: values.email,
                 subject: `Thank You ${values.fullName} for Subscribing to our Newsletter`,
                 react: <BaseEmailTemplate title="Thanks for Signing Up for Dara Dream Realty Newsletter" preview="Thanks for Signing Up for Dara Dream Realty Newsletter"><Text className="p-4 text-white">Thank you for subscribing to our newsletter. We&apos;ll keep you updated with the latest news and updates.</Text></BaseEmailTemplate>,
                 text: `Thank you for subscribing to our newsletter. We'll keep you updated with the latest news and updates.`
             },
             {
-                from: 'Dara Dream Realty <onboarding@resend.dev>',
+                from: `Dara Dream Realty <${process.env.ADMIN_EMAIL}>`,
                 to: process.env.ADMIN_EMAIL as string,
                 subject: `${values.fullName} subscribed to our newsletter`,
                 react: <NewsLetterAdminTemplate name={values.fullName} phone={values.phone} email={values.email}/>,

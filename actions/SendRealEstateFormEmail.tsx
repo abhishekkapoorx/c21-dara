@@ -33,7 +33,7 @@ export async function sendRealEstateFormEmail(formData: RealEstateFormProps) {
 
         // Send email to admin
         const { data, error } = await resend.emails.send({
-            from: 'Dara Dream Realty <onboarding@resend.dev>',
+            from: `Dara Dream Realty <${process.env.ADMIN_EMAIL}>`,
             to: ADMIN_EMAIL,
             subject: emailSubject,
             html: emailHtml,
@@ -42,7 +42,7 @@ export async function sendRealEstateFormEmail(formData: RealEstateFormProps) {
 
         // Send confirmation email to the client
         await resend.emails.send({
-            from: 'Dara Dream Realty <onboarding@resend.dev>',
+            from: `Dara Dream Realty <${process.env.ADMIN_EMAIL}>`,
             to: formData.email,
             subject: `Thank you for your ${formData.formType === 'homeBuyer' ? 'home buying' :
                 formData.formType === 'homeSeller' ? 'home selling' :
